@@ -11,12 +11,19 @@ import SnapKit
 class CalculatorScreenViewController: UIViewController {
     
     private let headerLabel = UILabel()
-    
     private let resultWindowView = UIView()
+    
     private let fullExpressionLabel = UILabel()
     private let resultCalculatedLabel = UILabel()
     private let deleteDigitButton = UIButton()
+    
     private let underlineView = UIView()
+    
+    private lazy var keyboardCollection: UICollectionView = {
+        let layout = KeyboardButtonLayout()
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collection
+    }()
     
     private let viewModel: CalculatorScreenViewModel
     
@@ -44,6 +51,7 @@ class CalculatorScreenViewController: UIViewController {
         setupResultCalculatedLabel()
         setupFullExpressionLabel()
         setupBorderView()
+        setupKeyboardCollection()
     }
     
     private func setupSuperView() {
@@ -70,7 +78,7 @@ class CalculatorScreenViewController: UIViewController {
         resultWindowView.snp.makeConstraints { make in
             make.top.equalTo(headerLabel.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(25)
-            make.height.equalToSuperview().multipliedBy(0.33)
+            make.height.equalToSuperview().multipliedBy(0.29)
         }
     }
     
@@ -82,7 +90,6 @@ class CalculatorScreenViewController: UIViewController {
         deleteDigitButton.tintColor = .appGray
         
         deleteDigitButton.snp.makeConstraints { make in
-//            make.bottom.equalToSuperview().inset(35)
             make.bottom.equalToSuperview().multipliedBy(0.85)
             make.trailing.equalToSuperview().inset(10)
         }
@@ -92,7 +99,7 @@ class CalculatorScreenViewController: UIViewController {
         resultWindowView.addSubview(resultCalculatedLabel)
         
         resultCalculatedLabel.text = viewModel.getInitialResult()
-        resultCalculatedLabel.textColor = .resultText
+        resultCalculatedLabel.textColor = .resultTitle
         resultCalculatedLabel.font = UIFont.systemFont(ofSize: 65, weight: .bold)
         resultCalculatedLabel.textAlignment = .right
         resultCalculatedLabel.adjustsFontSizeToFitWidth = true
@@ -102,7 +109,6 @@ class CalculatorScreenViewController: UIViewController {
         resultCalculatedLabel.backgroundColor = .clear
         
         resultCalculatedLabel.snp.makeConstraints { make in
-//            make.bottom.equalTo(deleteDigitButton.snp.top).offset(-40)
             make.bottom.equalTo(deleteDigitButton.snp.top).multipliedBy(0.8)
             make.leading.trailing.equalToSuperview()
         }
@@ -112,7 +118,7 @@ class CalculatorScreenViewController: UIViewController {
         resultWindowView.addSubview(fullExpressionLabel)
 
         fullExpressionLabel.text = viewModel.getInitialExpression()
-        fullExpressionLabel.textColor = .expressionText
+        fullExpressionLabel.textColor = .expressionTitle
         fullExpressionLabel.font = UIFont.systemFont(ofSize: 25)
         fullExpressionLabel.textAlignment = .right
         fullExpressionLabel.adjustsFontSizeToFitWidth = true
@@ -122,7 +128,6 @@ class CalculatorScreenViewController: UIViewController {
         fullExpressionLabel.backgroundColor = .clear
 
         fullExpressionLabel.snp.makeConstraints { make in
-//            make.bottom.equalTo(resultCalculatedLabel.snp.top).offset(-30)
             make.bottom.equalTo(resultCalculatedLabel.snp.top).multipliedBy(0.7)
             make.leading.trailing.equalToSuperview().inset(10)
         }
@@ -138,5 +143,39 @@ class CalculatorScreenViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
+    
+    private func setupKeyboardCollection() {
+        view.addSubview(keyboardCollection)
+        
+        keyboardCollection.backgroundColor = .clear
+        keyboardCollection.isScrollEnabled = false
+        keyboardCollection.register(KeyboardButtonViewCell.self, forCellWithReuseIdentifier: KeyboardButtonViewCell.identifier)
+        keyboardCollection.dataSource = self
+        keyboardCollection.delegate = self
+        keyboardCollection.contentMode = .center
+        
+        keyboardCollection.snp.makeConstraints { make in
+            make.top.equalTo(resultWindowView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+}
 
+extension CalculatorScreenViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel.cellViewModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardButtonViewCell.identifier, for: indexPath) as? KeyboardButtonViewCell else {
+            return KeyboardButtonViewCell()
+        }
+        
+        cell.configure(with: viewModel.cellViewModels[indexPath.item])
+        return cell
+    }
+}
+
+extension CalculatorScreenViewController: UICollectionViewDelegate {
+    
 }

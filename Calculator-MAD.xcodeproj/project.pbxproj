@@ -12,6 +12,11 @@
 		491D0DF1299E24B2002F5EB4 /* CalculatorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0DF0299E24B2002F5EB4 /* CalculatorData.swift */; };
 		491D0DF3299E2865002F5EB4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0DF2299E2865002F5EB4 /* String.swift */; };
 		491D0DF5299E286F002F5EB4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0DF4299E286F002F5EB4 /* Double.swift */; };
+		491D0DF9299E50E1002F5EB4 /* KeyboardButtonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0DF8299E50E1002F5EB4 /* KeyboardButtonViewCell.swift */; };
+		491D0DFB299E5104002F5EB4 /* KeyboardButtonViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0DFA299E5104002F5EB4 /* KeyboardButtonViewCellViewModel.swift */; };
+		491D0DFD299E5171002F5EB4 /* KeyboardButtonLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0DFC299E5171002F5EB4 /* KeyboardButtonLayout.swift */; };
+		491D0DFF299E517C002F5EB4 /* KeyboardButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0DFE299E517C002F5EB4 /* KeyboardButtonStyle.swift */; };
+		491D0E01299E87B2002F5EB4 /* KeyboardButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D0E00299E87B2002F5EB4 /* KeyboardButtons.swift */; };
 		4931B892299E1C0000CAEC13 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4931B891299E1C0000CAEC13 /* SnapKit */; };
 		4931B897299E1C8F00CAEC13 /* CalculatorScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931B896299E1C8F00CAEC13 /* CalculatorScreenViewController.swift */; };
 		4931B899299E1C9F00CAEC13 /* CalculatorScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931B898299E1C9F00CAEC13 /* CalculatorScreenViewModel.swift */; };
@@ -27,6 +32,11 @@
 		491D0DF0299E24B2002F5EB4 /* CalculatorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorData.swift; sourceTree = "<group>"; };
 		491D0DF2299E2865002F5EB4 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		491D0DF4299E286F002F5EB4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		491D0DF8299E50E1002F5EB4 /* KeyboardButtonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtonViewCell.swift; sourceTree = "<group>"; };
+		491D0DFA299E5104002F5EB4 /* KeyboardButtonViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtonViewCellViewModel.swift; sourceTree = "<group>"; };
+		491D0DFC299E5171002F5EB4 /* KeyboardButtonLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtonLayout.swift; sourceTree = "<group>"; };
+		491D0DFE299E517C002F5EB4 /* KeyboardButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtonStyle.swift; sourceTree = "<group>"; };
+		491D0E00299E87B2002F5EB4 /* KeyboardButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtons.swift; sourceTree = "<group>"; };
 		4931B896299E1C8F00CAEC13 /* CalculatorScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorScreenViewController.swift; sourceTree = "<group>"; };
 		4931B898299E1C9F00CAEC13 /* CalculatorScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorScreenViewModel.swift; sourceTree = "<group>"; };
 		499D249C299E173D0080E6F3 /* Calculator-MAD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calculator-MAD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				491D0DED299E245A002F5EB4 /* Calculator.swift */,
+				491D0E00299E87B2002F5EB4 /* KeyboardButtons.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -73,6 +84,25 @@
 				491D0DF0299E24B2002F5EB4 /* CalculatorData.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		491D0DF6299E505C002F5EB4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				491D0DF7299E5069002F5EB4 /* KeyboardButtonCollectionViewCell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		491D0DF7299E5069002F5EB4 /* KeyboardButtonCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				491D0DF8299E50E1002F5EB4 /* KeyboardButtonViewCell.swift */,
+				491D0DFA299E5104002F5EB4 /* KeyboardButtonViewCellViewModel.swift */,
+				491D0DFC299E5171002F5EB4 /* KeyboardButtonLayout.swift */,
+				491D0DFE299E517C002F5EB4 /* KeyboardButtonStyle.swift */,
+			);
+			path = KeyboardButtonCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		4931B893299E1C1400CAEC13 /* Application */ = {
@@ -120,6 +150,7 @@
 		499D249E299E173D0080E6F3 /* Calculator-MAD */ = {
 			isa = PBXGroup;
 			children = (
+				491D0DF6299E505C002F5EB4 /* Views */,
 				491D0DEF299E2488002F5EB4 /* Data */,
 				491D0DEC299E2449002F5EB4 /* Models */,
 				4914F047299E21480006A9D6 /* Extensions */,
@@ -212,11 +243,16 @@
 				491D0DF1299E24B2002F5EB4 /* CalculatorData.swift in Sources */,
 				4931B897299E1C8F00CAEC13 /* CalculatorScreenViewController.swift in Sources */,
 				499D24A0299E173D0080E6F3 /* AppDelegate.swift in Sources */,
+				491D0DFF299E517C002F5EB4 /* KeyboardButtonStyle.swift in Sources */,
+				491D0DFD299E5171002F5EB4 /* KeyboardButtonLayout.swift in Sources */,
 				499D24A2299E173D0080E6F3 /* SceneDelegate.swift in Sources */,
 				4914F049299E216A0006A9D6 /* UIColor.swift in Sources */,
+				491D0E01299E87B2002F5EB4 /* KeyboardButtons.swift in Sources */,
 				491D0DF3299E2865002F5EB4 /* String.swift in Sources */,
 				491D0DF5299E286F002F5EB4 /* Double.swift in Sources */,
 				491D0DEE299E245A002F5EB4 /* Calculator.swift in Sources */,
+				491D0DF9299E50E1002F5EB4 /* KeyboardButtonViewCell.swift in Sources */,
+				491D0DFB299E5104002F5EB4 /* KeyboardButtonViewCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
