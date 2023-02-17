@@ -6,14 +6,21 @@
 //
 
 import Foundation
+import UIKit
 
 final class KeyboardButtonViewCellViewModel {
     
-    private(set) var style: KeyboardButtonStyle
-    private(set) var title: String
+    var updateAppearanceOfSelectedButton: ((UIColor) -> Void)?
     
-    init(title: String) {
+    private(set) var title: String
+    private(set) var style: KeyboardButtonStyle
+    
+    init(title: String, isOperation: Bool) {
         self.title = title
-        style = ["÷", "×", "+", "-", "="].contains(title) ? .operation : .command
+        style = isOperation ? .operation : .command
+    }
+    
+    func setNewAppearance() {
+        
     }
 }

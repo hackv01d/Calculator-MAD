@@ -31,10 +31,9 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     
     func configure(with viewModel: KeyboardButtonViewCellViewModel) {
         backgroundColor = viewModel.style.primaryBackgroundColor
-        keyboardButtonLabel.textColor = viewModel.style.textColor
+        keyboardButtonLabel.textColor = viewModel.style.titleColor
         keyboardButtonLabel.text = viewModel.title
         style = viewModel.style
-        
     }
     
     override func layoutSubviews() {
@@ -43,8 +42,7 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     }
     
     private func updateAppearance() {
-        guard let style = style else { return }
-        backgroundColor = isHighlighted ? style.secondaryBackgroundColor : style.primaryBackgroundColor
+        backgroundColor = isHighlighted ? style?.secondaryBackgroundColor : style?.primaryBackgroundColor
     }
     
     private func setupKeyboardButtonLabel() {

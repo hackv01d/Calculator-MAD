@@ -1,5 +1,5 @@
 //
-//  CalculatorScreenViewModel.swift
+//  CalculatorViewModel.swift
 //  Calculator-MAD
 //
 //  Created by Ivan Semenov on 16.02.2023.
@@ -7,8 +7,7 @@
 
 import Foundation
 
-final class CalculatorScreenViewModel {
-    
+final class CalculatorViewModel {
     
     var updateResult: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
@@ -16,19 +15,19 @@ final class CalculatorScreenViewModel {
     let cellViewModels: [KeyboardButtonViewCellViewModel]
     
     private(set) var header = "Calculator"
-    private let keyboardButtonsTitles = [
-        "AC", "±", "%", "÷",
-        "7", "8", "9", "×",
-        "4", "5", "6", "-",
-        "1", "2", "3", "+",
-        "0", ".", "="
+    private let keyboardButtonsTitles: [KeyboardButtons] = [
+        .allClear, .plusMinus, .percent, .divide,
+        .digit(7), .digit(8), .digit(9), .multiply,
+        .digit(4), .digit(5), .digit(6), .minus,
+        .digit(1), .digit(2), .digit(3), .plus,
+        .digit(0), .decimal, .equal
     ]
     
     private let model: Calculator
 
     init(with model: Calculator) {
         self.model = model
-        cellViewModels = keyboardButtonsTitles.map { KeyboardButtonViewCellViewModel(title: $0) }
+        cellViewModels = keyboardButtonsTitles.map { KeyboardButtonViewCellViewModel(title: $0.title, isOperation: $0.isOperation) }
     }
     
     func getInitialResult() -> String {
@@ -40,7 +39,7 @@ final class CalculatorScreenViewModel {
     }
     
     func touchOnCalculatorButton(at index: Int) {
-        let title = keyboardButtonsTitles[index]
+        let title = keyboardButtonsTitles[index].title
         
         switch title {
         case "AC":

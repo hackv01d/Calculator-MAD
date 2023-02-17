@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let viewModel = CalculatorScreenViewModel(with: Calculator())
-        let viewController = CalculatorScreenViewController(with: viewModel)
+        let viewModel = CalculatorViewModel(with: Calculator())
+        let viewController = CalculatorViewController(with: viewModel)
         
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()

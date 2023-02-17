@@ -1,5 +1,5 @@
 //
-//  CalculatorScreenViewController.swift
+//  CalculatorViewController.swift
 //  Calculator-MAD
 //
 //  Created by Ivan Semenov on 16.02.2023.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CalculatorScreenViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     private let headerLabel = UILabel()
     private let resultWindowView = UIView()
@@ -25,10 +25,10 @@ class CalculatorScreenViewController: UIViewController {
         return collection
     }()
     
-    private let viewModel: CalculatorScreenViewModel
+    private let viewModel: CalculatorViewModel
     
     
-    init(with viewModel: CalculatorScreenViewModel) {
+    init(with viewModel: CalculatorViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -101,7 +101,7 @@ class CalculatorScreenViewController: UIViewController {
         
         resultCalculatedLabel.text = viewModel.getInitialResult()
         resultCalculatedLabel.textColor = .resultTitle
-        resultCalculatedLabel.font = UIFont.systemFont(ofSize: 65, weight: .bold)
+        resultCalculatedLabel.font = UIFont.systemFont(ofSize: 67, weight: .bold)
         resultCalculatedLabel.textAlignment = .right
         resultCalculatedLabel.adjustsFontSizeToFitWidth = true
         resultCalculatedLabel.minimumScaleFactor = 0.2
@@ -162,7 +162,7 @@ class CalculatorScreenViewController: UIViewController {
     }
 }
 
-extension CalculatorScreenViewController: UICollectionViewDataSource {
+extension CalculatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.cellViewModels.count
     }
@@ -177,13 +177,13 @@ extension CalculatorScreenViewController: UICollectionViewDataSource {
     }
 }
 
-extension CalculatorScreenViewController: UICollectionViewDelegate {
+extension CalculatorViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.touchOnCalculatorButton(at: indexPath.item)
     }
 }
 
-private extension CalculatorScreenViewController {
+private extension CalculatorViewController {
     private func bindToViewModel() {
         viewModel.updateResult = { [weak self] result in
             self?.resultCalculatedLabel.text = result

@@ -20,7 +20,10 @@ extension UIColor {
     
     static let secondaryCommandButton = UIColor(named: "secondaryCommandButton")
     static let secondaryOperationButton = UIColor(named: "secondaryOperationButton")
-    
+
     static let commandButtonTitle = UIColor(named: "commandButtonTitle")
     static let operationButtonTitle = UIColor(named: "operationButtonTitle")
+    
+    static let selectedOperationButton = UIColor(named: "selectedOperationButton")
+    static let selectedOperationTitle = UIColor(named: "selectedOperationTitle")
 }

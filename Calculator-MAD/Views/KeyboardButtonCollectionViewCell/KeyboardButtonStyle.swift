@@ -29,12 +29,30 @@ enum KeyboardButtonStyle {
         }
     }
     
-    var textColor: UIColor? {
+    var titleColor: UIColor? {
         switch self {
         case .command:
             return .commandButtonTitle
         case .operation:
             return .operationButtonTitle
+        }
+    }
+    
+    var selectedBackgroundColor: UIColor? {
+        switch self {
+        case .command:
+            return nil
+        case .operation:
+            return .selectedOperationButton
+        }
+    }
+    
+    var selectedTitleColor: UIColor? {
+        switch self {
+        case .command:
+            return nil
+        case .operation:
+            return .selectedOperationTitle
         }
     }
 }
