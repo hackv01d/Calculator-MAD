@@ -41,6 +41,7 @@ class CalculatorScreenViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        bindToViewModel()
     }
     
     private func setup() {
@@ -177,5 +178,19 @@ extension CalculatorScreenViewController: UICollectionViewDataSource {
 }
 
 extension CalculatorScreenViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.touchOnCalculatorButton(at: indexPath.item)
+    }
+}
+
+private extension CalculatorScreenViewController {
+    private func bindToViewModel() {
+        viewModel.updateResult = { [weak self] result in
+            self?.resultCalculatedLabel.text = result
+        }
+        
+        viewModel.updateExpression = { [weak self] expression in
+            self?.fullExpressionLabel.text = expression
+        }
+    }
 }

@@ -59,7 +59,7 @@ final class Calculator {
         guard let result = result else { return nil }
         
         currentNumber = result.rightType
-        fullExpression = "\(firstNumber.rightType) \(operation) \(secondNumber.rightType) ="
+        fullExpression = "\(firstNumber.rightType) \(operation) \(secondNumber.rightType)"
         
         CalculatorData.shared.saveResult(result: result.rightType, expression: fullExpression)
         

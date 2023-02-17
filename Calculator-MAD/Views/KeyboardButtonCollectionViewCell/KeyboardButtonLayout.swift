@@ -79,7 +79,6 @@ class KeyboardButtonLayout: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        super.layoutAttributesForItem(at: indexPath)
         return itemCache[indexPath.item]
     }
 }
