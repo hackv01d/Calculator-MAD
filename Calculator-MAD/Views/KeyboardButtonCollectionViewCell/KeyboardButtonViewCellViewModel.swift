@@ -10,17 +10,11 @@ import UIKit
 
 final class KeyboardButtonViewCellViewModel {
     
-    var updateAppearanceOfSelectedButton: ((UIColor) -> Void)?
-    
     private(set) var title: String
     private(set) var style: KeyboardButtonStyle
     
     init(title: String, isOperation: Bool) {
         self.title = title
         style = isOperation ? .operation : .command
-    }
-    
-    func setNewAppearance() {
-        
     }
 }

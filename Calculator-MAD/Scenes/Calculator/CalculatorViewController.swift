@@ -44,6 +44,11 @@ class CalculatorViewController: UIViewController {
         bindToViewModel()
     }
     
+    @objc
+    private func handleDeleteDigitButton() {
+        viewModel.removeDigit()
+    }
+    
     private func setup() {
         setupSuperView()
         setupHeaderLabel()
@@ -89,6 +94,7 @@ class CalculatorViewController: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 27, weight: .medium)
         deleteDigitButton.setImage(UIImage(systemName: "delete.left", withConfiguration: config), for: .normal)
         deleteDigitButton.tintColor = .appGray
+        deleteDigitButton.addTarget(self, action: #selector(handleDeleteDigitButton), for: .touchUpInside)
         
         deleteDigitButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().multipliedBy(0.85)

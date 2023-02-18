@@ -78,12 +78,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		491D0DEF299E2488002F5EB4 /* Data */ = {
+		491D0DEF299E2488002F5EB4 /* AppData */ = {
 			isa = PBXGroup;
 			children = (
 				491D0DF0299E24B2002F5EB4 /* CalculatorData.swift */,
 			);
-			path = Data;
+			path = AppData;
 			sourceTree = "<group>";
 		};
 		491D0DF6299E505C002F5EB4 /* Views */ = {
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				491D0DF6299E505C002F5EB4 /* Views */,
-				491D0DEF299E2488002F5EB4 /* Data */,
+				491D0DEF299E2488002F5EB4 /* AppData */,
 				491D0DEC299E2449002F5EB4 /* Models */,
 				4914F047299E21480006A9D6 /* Extensions */,
 				4931B894299E1C2300CAEC13 /* Scenes */,

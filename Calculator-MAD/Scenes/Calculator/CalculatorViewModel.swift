@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class CalculatorViewModel {
     
@@ -38,6 +39,11 @@ final class CalculatorViewModel {
         return model.fullExpression
     }
     
+    func removeDigit() {
+        guard let value = model.deleteLastDigit() else { return }
+        updateResult?(value)
+    }
+    
     func touchOnCalculatorButton(at index: Int) {
         let title = keyboardButtonsTitles[index].title
         
@@ -64,35 +70,35 @@ final class CalculatorViewModel {
     }
     
     private func addPlusMinus() {
-        guard let data = model.changeSign() else { return }
-        updateResult?(data)
+        guard let value = model.changeSign() else { return }
+        updateResult?(value)
     }
     
     private func getPercent() {
-        guard let (data, expression) = model.getPercent() else { return }
-        updateResult?(data)
+        guard let (value, expression) = model.getPercent() else { return }
+        updateResult?(value)
         updateExpression?(expression)
     }
     
     private func getResult() {
         guard !isDivisionError() else { return }
-        guard let (data, expression) = model.getResult() else { return }
+        guard let (value, expression) = model.getResult() else { return }
         
-        updateResult?(data)
+        updateResult?(value)
         updateExpression?(expression)
     }
     
     private func updateOperation(_ title: String) {
         guard !isDivisionError() else { return }
-        guard let (data, expression) = model.setOperation(currentOperation: title) else { return }
+        guard let (value, expression) = model.setOperation(currentOperation: title) else { return }
         
-        updateResult?(data)
+        updateResult?(value)
         updateExpression?(expression)
     }
     
     private func addDigit(_ title: String) {
-        guard let data = model.addNewDigit(digit: title) else { return }
-        updateResult?(data)
+        guard let value = model.addNewDigit(digit: title) else { return }
+        updateResult?(value)
     }
     
     private func isDivisionError() -> Bool {
@@ -103,3 +109,4 @@ final class CalculatorViewModel {
         return true
     }
 }
+

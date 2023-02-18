@@ -155,6 +155,13 @@ final class Calculator {
         CalculatorData.shared.saveResult(result: currentNumber, expression: fullExpression)
     }
     
+    func deleteLastDigit() -> String? {
+        guard !currentNumber.isEmpty else { return nil}
+        
+        currentNumber.removeLast()
+        return currentNumber
+    }
+    
     func getFullExpression() -> String? {
         guard let firstNumber = firstNumber else { return nil }
         guard let operation = operation else { return nil }
