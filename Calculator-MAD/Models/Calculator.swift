@@ -24,18 +24,21 @@ final class Calculator {
     }
     
     private var isTransition = false
-    private var isDivisionByZero: Bool {
-        guard firstNumber != nil else { return false }
-        if (currentNumber == "0" && operation == "÷") { return true }
-        return false
-    }
+    
     private var isFirstNumber: Bool {
         guard firstNumber != nil else { return false }
         return true
     }
     
+    private var isDivisionByZero: Bool {
+        guard firstNumber != nil else { return false }
+        if (currentNumber == "0" && operation == "÷") { return true }
+        return false
+    }
+    
     private var result: Double? {
         secondNumber = currentNumber.toDouble
+        
         guard let firstNumber = firstNumber else { return nil }
         guard let secondNumber = secondNumber else { return nil }
         guard let operation = operation else { return nil }
@@ -79,8 +82,8 @@ final class Calculator {
             
             return (number.rightType, fullExpression)
         }
-        
         let number = currentNumber.toDouble
+        
         guard var number = number else { return nil }
         guard let firstNumber = firstNumber else { return nil }
         

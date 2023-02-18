@@ -11,4 +11,8 @@ extension String {
     var toDouble: Double? {
         return Double(self)
     }
+    
+    var replaceDecimal: String {
+        return self.replacingOccurrences(of: ".", with: ",")
+    }
 }

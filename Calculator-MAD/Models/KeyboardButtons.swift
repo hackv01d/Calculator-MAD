@@ -29,7 +29,7 @@ enum KeyboardButtons {
         case .percent:
             return "%"
         case .decimal:
-            return "."
+            return ","
         case .divide:
             return "÷"
         case .multiply:

@@ -41,11 +41,11 @@ final class CalculatorViewModel {
     
     func removeDigit() {
         guard let value = model.deleteLastDigit() else { return }
-        updateResult?(value)
+        updateResult?(value.replaceDecimal)
     }
     
     func touchOnCalculatorButton(at index: Int) {
-        let title = keyboardButtonsTitles[index].title
+        let title = keyboardButtonsTitles[index].title.replacingOccurrences(of: ",", with: ".")
         
         switch title {
         case "AC":
@@ -71,34 +71,34 @@ final class CalculatorViewModel {
     
     private func addPlusMinus() {
         guard let value = model.changeSign() else { return }
-        updateResult?(value)
+        updateResult?(value.replaceDecimal)
     }
     
     private func getPercent() {
         guard let (value, expression) = model.getPercent() else { return }
-        updateResult?(value)
-        updateExpression?(expression)
+        updateResult?(value.replaceDecimal)
+        updateExpression?(expression.replaceDecimal)
     }
     
     private func getResult() {
         guard !isDivisionError() else { return }
         guard let (value, expression) = model.getResult() else { return }
         
-        updateResult?(value)
-        updateExpression?(expression)
+        updateResult?(value.replaceDecimal)
+        updateExpression?(expression.replaceDecimal)
     }
     
     private func updateOperation(_ title: String) {
         guard !isDivisionError() else { return }
         guard let (value, expression) = model.setOperation(currentOperation: title) else { return }
         
-        updateResult?(value)
-        updateExpression?(expression)
+        updateResult?(value.replaceDecimal)
+        updateExpression?(expression.replaceDecimal)
     }
     
     private func addDigit(_ title: String) {
         guard let value = model.addNewDigit(digit: title) else { return }
-        updateResult?(value)
+        updateResult?(value.replaceDecimal)
     }
     
     private func isDivisionError() -> Bool {
