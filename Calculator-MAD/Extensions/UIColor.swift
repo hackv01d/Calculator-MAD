@@ -12,20 +12,20 @@ extension UIColor {
     static let appBackground = UIColor(named: "appBackground")
     static let appGray = UIColor(named: "Gray")
     
-    static let resultTitle = UIColor(named: "resultTitle")
-    static let expressionTitle = UIColor(named: "expressionTitle")
+    static let purpleResultTitle = UIColor(named: "resultTitle")
+    static let purpleExpressionTitle = UIColor(named: "expressionTitle")
     
-    static let commandButton = UIColor(named: "commandButton")
-    static let operationButton = UIColor(named: "operationButton")
+    static let purpleCommandButton = UIColor(named: "commandButton")
+    static let purpleOperationButton = UIColor(named: "operationButton")
     
-    static let secondaryCommandButton = UIColor(named: "secondaryCommandButton")
-    static let secondaryOperationButton = UIColor(named: "secondaryOperationButton")
+    static let purpleSecondaryCommandButton = UIColor(named: "secondaryCommandButton")
+    static let purpleSecondaryOperationButton = UIColor(named: "secondaryOperationButton")
 
-    static let commandButtonTitle = UIColor(named: "commandButtonTitle")
-    static let operationButtonTitle = UIColor(named: "operationButtonTitle")
+    static let purpleCommandButtonTitle = UIColor(named: "commandButtonTitle")
+    static let purpleOperationButtonTitle = UIColor(named: "operationButtonTitle")
     
-    static let selectedOperationButton = UIColor(named: "selectedOperationButton")
-    static let selectedOperationTitle = UIColor(named: "selectedOperationTitle")
+    static let purpleSelectedOperationButton = UIColor(named: "selectedOperationButton")
+    static let purpleSelectedOperationTitle = UIColor(named: "selectedOperationTitle")
     
-    static let errorTitle = UIColor(named: "errorTitle")
+    static let purpleErrorTitle = UIColor(named: "errorTitle")
 }

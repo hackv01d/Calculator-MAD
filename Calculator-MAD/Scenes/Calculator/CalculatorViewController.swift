@@ -11,6 +11,7 @@ import SnapKit
 class CalculatorViewController: UIViewController {
     
     private let headerLabel = UILabel()
+    private let settingsButton = UIButton()
     private let resultWindowView = UIView()
     
     private let fullExpressionLabel = UILabel()
@@ -45,6 +46,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @objc
+    private func handleSettingsButton() {
+        viewModel.showSettingsScreen()
+    }
+    
+    @objc
     private func handleDeleteDigitButton() {
         viewModel.removeDigit()
     }
@@ -52,6 +58,7 @@ class CalculatorViewController: UIViewController {
     private func setup() {
         setupSuperView()
         setupHeaderLabel()
+        setupSettingsButton()
         setupResultWindowView()
         setupDeleteDigitButton()
         setupResultCalculatedLabel()
@@ -74,6 +81,20 @@ class CalculatorViewController: UIViewController {
         
         headerLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(18)
+        }
+    }
+    
+    private func setupSettingsButton() {
+        view.addSubview(settingsButton)
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular)
+        settingsButton.setImage(UIImage(systemName: "gearshape", withConfiguration: config), for: .normal)
+        settingsButton.tintColor = .appGray
+        settingsButton.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
+        
+        settingsButton.snp.makeConstraints { make in
+            make.bottom.top.equalTo(headerLabel)
+            make.trailing.equalToSuperview().inset(30)
         }
     }
     
@@ -106,7 +127,7 @@ class CalculatorViewController: UIViewController {
         resultWindowView.addSubview(resultCalculatedLabel)
         
         resultCalculatedLabel.text = viewModel.getInitialResult()
-        resultCalculatedLabel.textColor = .resultTitle
+        resultCalculatedLabel.textColor = viewModel.themeStyle.resultTitle
         resultCalculatedLabel.font = UIFont.systemFont(ofSize: 67, weight: .bold)
         resultCalculatedLabel.textAlignment = .right
         resultCalculatedLabel.adjustsFontSizeToFitWidth = true
@@ -125,7 +146,7 @@ class CalculatorViewController: UIViewController {
         resultWindowView.addSubview(fullExpressionLabel)
 
         fullExpressionLabel.text = viewModel.getInitialExpression()
-        fullExpressionLabel.textColor = .expressionTitle
+        fullExpressionLabel.textColor = viewModel.themeStyle.expressionTitle
         fullExpressionLabel.font = UIFont.systemFont(ofSize: 25)
         fullExpressionLabel.textAlignment = .right
         fullExpressionLabel.adjustsFontSizeToFitWidth = true
@@ -201,7 +222,11 @@ private extension CalculatorViewController {
         
         viewModel.showCalculateError = { [weak self] error in
             self?.resultCalculatedLabel.text = error
-            self?.resultCalculatedLabel.textColor = .errorTitle
+            self?.resultCalculatedLabel.textColor = .purpleErrorTitle
+        }
+        
+        viewModel.didGoToSettingsScreen = { [weak self] viewController in
+            self?.present(viewController, animated: true)
         }
     }
 }

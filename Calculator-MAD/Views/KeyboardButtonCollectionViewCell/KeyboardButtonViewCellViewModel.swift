@@ -13,8 +13,8 @@ final class KeyboardButtonViewCellViewModel {
     private(set) var title: String
     private(set) var style: KeyboardButtonStyle
     
-    init(title: String, isOperation: Bool) {
+    init(title: String, isOperation: Bool, themeStyle: ThemeStyles) {
         self.title = title
-        style = isOperation ? .operation : .command
+        style = isOperation ? .operation(themeStyle) : .command(themeStyle)
     }
 }

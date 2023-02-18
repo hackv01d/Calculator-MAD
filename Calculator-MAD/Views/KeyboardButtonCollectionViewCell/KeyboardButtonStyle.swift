@@ -9,50 +9,51 @@ import Foundation
 import UIKit
 
 enum KeyboardButtonStyle {
-    case command, operation
+    case command(ThemeStyles)
+    case operation(ThemeStyles)
     
     var primaryBackgroundColor: UIColor? {
         switch self {
-        case .command:
-            return .commandButton
-        case .operation:
-            return .operationButton
+        case .command(let theme):
+            return theme.primaryCommandButton
+        case .operation(let theme):
+            return theme.primaryOperationButton
         }
     }
     
     var secondaryBackgroundColor: UIColor? {
         switch self {
-        case .command:
-            return .secondaryCommandButton
-        case .operation:
-            return .secondaryOperationButton
+        case .command(let theme):
+            return theme.secondaryCommandButton
+        case .operation(let theme):
+            return theme.secondaryOperationButton
         }
     }
     
     var titleColor: UIColor? {
         switch self {
-        case .command:
-            return .commandButtonTitle
-        case .operation:
-            return .operationButtonTitle
+        case .command(let theme):
+            return theme.titleCommandButton
+        case .operation(let theme):
+            return theme.titleOperationButton
         }
     }
     
     var selectedBackgroundColor: UIColor? {
         switch self {
-        case .command:
-            return .commandButton
-        case .operation:
-            return .selectedOperationButton
+        case .command(let theme):
+            return theme.selectedCommandButton
+        case .operation(let theme):
+            return theme.selectedOperationButton
         }
     }
     
     var selectedTitleColor: UIColor? {
         switch self {
-        case .command:
-            return .commandButtonTitle
-        case .operation:
-            return .selectedOperationTitle
+        case .command(let theme):
+            return theme.selectedCommandButtonTitle
+        case .operation(let theme):
+            return theme.selectedOperationButtonTitle
         }
     }
 }

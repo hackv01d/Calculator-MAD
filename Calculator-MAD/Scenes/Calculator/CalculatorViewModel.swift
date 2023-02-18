@@ -13,11 +13,13 @@ final class CalculatorViewModel {
     var updateResult: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
     var showCalculateError: ((String) -> Void)?
+    var didGoToSettingsScreen: ((UIViewController) -> Void)?
     
     let cellViewModels: [KeyboardButtonViewCellViewModel]
     
     private(set) var header = "Calculator"
-    private let keyboardButtonsTitles: [KeyboardButtons] = [
+    private(set) var themeStyle: ThemeStyles
+    private let keyboardButtons: [KeyboardButtons] = [
         .allClear, .plusMinus, .percent, .divide,
         .digit(7), .digit(8), .digit(9), .multiply,
         .digit(4), .digit(5), .digit(6), .minus,
@@ -29,7 +31,8 @@ final class CalculatorViewModel {
 
     init(with model: Calculator) {
         self.model = model
-        cellViewModels = keyboardButtonsTitles.map { KeyboardButtonViewCellViewModel(title: $0.title, isOperation: $0.isOperation) }
+        self.themeStyle = UserSettings.shared.themeStyle
+        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title, isOperation: $0.isOperation, themeStyle: UserSettings.shared.themeStyle) }
     }
     
     func getInitialResult() -> String {
@@ -45,8 +48,14 @@ final class CalculatorViewModel {
         updateResult?(value.replaceDecimal)
     }
     
+    func showSettingsScreen() {
+        let viewModel = SettingsViewModel()
+        let viewController = SettingsViewController(with: viewModel)
+        didGoToSettingsScreen?(viewController)
+    }
+    
     func touchOnCalculatorButton(at index: Int) {
-        let title = keyboardButtonsTitles[index].title.replacingOccurrences(of: ",", with: ".")
+        let title = keyboardButtons[index].title.replacingOccurrences(of: ",", with: ".")
         
         switch title {
         case "AC":
