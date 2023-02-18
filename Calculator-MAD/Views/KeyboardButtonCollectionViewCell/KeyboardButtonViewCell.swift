@@ -20,6 +20,12 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
         }
     }
     
+    override var isSelected: Bool {
+        didSet {
+            buttonIsSelected()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupKeyboardButtonLabel()
@@ -43,6 +49,11 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     
     private func updateAppearance() {
         backgroundColor = isHighlighted ? style?.secondaryBackgroundColor : style?.primaryBackgroundColor
+    }
+    
+    private func buttonIsSelected() {
+        backgroundColor = isSelected ? style?.selectedBackgroundColor : style?.primaryBackgroundColor
+        keyboardButtonLabel.textColor = isSelected ? style?.selectedTitleColor : style?.titleColor
     }
     
     private func setupKeyboardButtonLabel() {

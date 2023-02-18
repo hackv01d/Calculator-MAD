@@ -41,7 +41,7 @@ enum KeyboardButtonStyle {
     var selectedBackgroundColor: UIColor? {
         switch self {
         case .command:
-            return nil
+            return .commandButton
         case .operation:
             return .selectedOperationButton
         }
@@ -50,7 +50,7 @@ enum KeyboardButtonStyle {
     var selectedTitleColor: UIColor? {
         switch self {
         case .command:
-            return nil
+            return .commandButtonTitle
         case .operation:
             return .selectedOperationTitle
         }
