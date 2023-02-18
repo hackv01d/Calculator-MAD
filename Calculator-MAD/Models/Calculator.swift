@@ -183,6 +183,8 @@ final class Calculator {
     }
     
     func checkDivisionByZero() -> Bool {
-        return isDivisionByZero
+        guard isDivisionByZero else { return false }
+        currentNumber = ""
+        return true
     }
 }

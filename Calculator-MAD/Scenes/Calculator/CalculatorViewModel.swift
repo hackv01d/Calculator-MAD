@@ -12,6 +12,7 @@ final class CalculatorViewModel {
     
     var updateResult: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
+    var showCalculateError: ((String) -> Void)?
     
     let cellViewModels: [KeyboardButtonViewCellViewModel]
     
@@ -76,6 +77,7 @@ final class CalculatorViewModel {
     
     private func getPercent() {
         guard let (value, expression) = model.getPercent() else { return }
+        
         updateResult?(value.replaceDecimal)
         updateExpression?(expression.replaceDecimal)
     }
@@ -103,9 +105,8 @@ final class CalculatorViewModel {
     
     private func isDivisionError() -> Bool {
         guard model.checkDivisionByZero() else { return false }
-        guard let expression = model.getFullExpression() else { return false }
         
-//        didDivisionError?(expression)
+        showCalculateError?("Error")
         return true
     }
 }

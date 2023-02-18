@@ -198,5 +198,10 @@ private extension CalculatorViewController {
         viewModel.updateExpression = { [weak self] expression in
             self?.fullExpressionLabel.text = expression
         }
+        
+        viewModel.showCalculateError = { [weak self] error in
+            self?.resultCalculatedLabel.text = error
+            self?.resultCalculatedLabel.textColor = .errorTitle
+        }
     }
 }

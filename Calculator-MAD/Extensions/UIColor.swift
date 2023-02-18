@@ -26,4 +26,6 @@ extension UIColor {
     
     static let selectedOperationButton = UIColor(named: "selectedOperationButton")
     static let selectedOperationTitle = UIColor(named: "selectedOperationTitle")
+    
+    static let errorTitle = UIColor(named: "errorTitle")
 }
