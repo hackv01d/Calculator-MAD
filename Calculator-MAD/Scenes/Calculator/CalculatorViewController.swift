@@ -225,8 +225,9 @@ private extension CalculatorViewController {
             self?.resultCalculatedLabel.textColor = .purpleErrorTitle
         }
         
-        viewModel.didGoToSettingsScreen = { [weak self] viewController in
-            self?.present(viewController, animated: true)
+        viewModel.didGoToSettingsScreen = { [weak self] navController in
+            navController.overrideUserInterfaceStyle = .dark
+            self?.present(navController, animated: true)
         }
     }
 }

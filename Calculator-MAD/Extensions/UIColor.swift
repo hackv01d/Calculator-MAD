@@ -28,4 +28,6 @@ extension UIColor {
     static let purpleSelectedOperationTitle = UIColor(named: "selectedOperationTitle")
     
     static let purpleErrorTitle = UIColor(named: "errorTitle")
+    
+    static let settingsViewCell = UIColor(named: "settingsViewCell")
 }

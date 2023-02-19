@@ -13,9 +13,9 @@ final class CalculatorViewModel {
     var updateResult: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
     var showCalculateError: ((String) -> Void)?
-    var didGoToSettingsScreen: ((UIViewController) -> Void)?
+    var didGoToSettingsScreen: ((UINavigationController) -> Void)?
     
-    let cellViewModels: [KeyboardButtonViewCellViewModel]
+    var cellViewModels: [KeyboardButtonViewCellViewModel] = []
     
     private(set) var header = "Calculator"
     private(set) var themeStyle: ThemeStyles
@@ -32,7 +32,7 @@ final class CalculatorViewModel {
     init(with model: Calculator) {
         self.model = model
         self.themeStyle = UserSettings.shared.themeStyle
-        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title, isOperation: $0.isOperation, themeStyle: UserSettings.shared.themeStyle) }
+        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title, isOperation: $0.isOperation, themeStyle: themeStyle) }
     }
     
     func getInitialResult() -> String {
@@ -51,7 +51,8 @@ final class CalculatorViewModel {
     func showSettingsScreen() {
         let viewModel = SettingsViewModel()
         let viewController = SettingsViewController(with: viewModel)
-        didGoToSettingsScreen?(viewController)
+        let navController = UINavigationController(rootViewController: viewController)
+        didGoToSettingsScreen?(navController)
     }
     
     func touchOnCalculatorButton(at index: Int) {

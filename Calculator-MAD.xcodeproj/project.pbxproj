@@ -19,8 +19,13 @@
 		4931B892299E1C0000CAEC13 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4931B891299E1C0000CAEC13 /* SnapKit */; };
 		4931B897299E1C8F00CAEC13 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931B896299E1C8F00CAEC13 /* CalculatorViewController.swift */; };
 		4931B899299E1C9F00CAEC13 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4931B898299E1C9F00CAEC13 /* CalculatorViewModel.swift */; };
+		493C371B29A2791900D00C97 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493C371A29A2791900D00C97 /* SettingsSection.swift */; };
 		493DC2EA29A0F5B70023AD98 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DC2E929A0F5B70023AD98 /* SettingsViewController.swift */; };
 		493DC2EC29A0F5E80023AD98 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DC2EB29A0F5E80023AD98 /* SettingsViewModel.swift */; };
+		493DC2EF29A0FD860023AD98 /* KeyboardSettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DC2EE29A0FD860023AD98 /* KeyboardSettingsViewCell.swift */; };
+		493DC2F129A103100023AD98 /* KeyboardSettingsViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DC2F029A103100023AD98 /* KeyboardSettingsViewCellViewModel.swift */; };
+		493DC2F429A146B80023AD98 /* ThemeStyleSettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DC2F329A146B80023AD98 /* ThemeStyleSettingsViewCell.swift */; };
+		493DC2F629A146C80023AD98 /* ThemeStyleSettingsViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493DC2F529A146C80023AD98 /* ThemeStyleSettingsViewCellViewModel.swift */; };
 		4962B501299FDEA500562711 /* KeyboardButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4962B500299FDEA500562711 /* KeyboardButtons.swift */; };
 		499D24A0299E173D0080E6F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D249F299E173D0080E6F3 /* AppDelegate.swift */; };
 		499D24A2299E173D0080E6F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D24A1299E173D0080E6F3 /* SceneDelegate.swift */; };
@@ -42,8 +47,13 @@
 		491D0DFE299E517C002F5EB4 /* KeyboardButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtonStyle.swift; sourceTree = "<group>"; };
 		4931B896299E1C8F00CAEC13 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		4931B898299E1C9F00CAEC13 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
+		493C371A29A2791900D00C97 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		493DC2E929A0F5B70023AD98 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		493DC2EB29A0F5E80023AD98 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		493DC2EE29A0FD860023AD98 /* KeyboardSettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsViewCell.swift; sourceTree = "<group>"; };
+		493DC2F029A103100023AD98 /* KeyboardSettingsViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsViewCellViewModel.swift; sourceTree = "<group>"; };
+		493DC2F329A146B80023AD98 /* ThemeStyleSettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyleSettingsViewCell.swift; sourceTree = "<group>"; };
+		493DC2F529A146C80023AD98 /* ThemeStyleSettingsViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyleSettingsViewCellViewModel.swift; sourceTree = "<group>"; };
 		4962B500299FDEA500562711 /* KeyboardButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtons.swift; sourceTree = "<group>"; };
 		499D249C299E173D0080E6F3 /* Calculator-MAD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calculator-MAD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499D249F299E173D0080E6F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +92,7 @@
 			children = (
 				491D0DED299E245A002F5EB4 /* Calculator.swift */,
 				4962B500299FDEA500562711 /* KeyboardButtons.swift */,
+				493C371A29A2791900D00C97 /* SettingsSection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -98,6 +109,8 @@
 		491D0DF6299E505C002F5EB4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				493DC2F229A146780023AD98 /* ThemeStyleSettingsTableViewCell */,
+				493DC2ED29A0FD5A0023AD98 /* KeyboardSettingsTableViewCell */,
 				491D0DF7299E5069002F5EB4 /* KeyboardButtonCollectionViewCell */,
 				49D8746529A0D11D004CFCE2 /* ThemeStyles.swift */,
 			);
@@ -149,6 +162,24 @@
 				493DC2EB29A0F5E80023AD98 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		493DC2ED29A0FD5A0023AD98 /* KeyboardSettingsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				493DC2EE29A0FD860023AD98 /* KeyboardSettingsViewCell.swift */,
+				493DC2F029A103100023AD98 /* KeyboardSettingsViewCellViewModel.swift */,
+			);
+			path = KeyboardSettingsTableViewCell;
+			sourceTree = "<group>";
+		};
+		493DC2F229A146780023AD98 /* ThemeStyleSettingsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				493DC2F329A146B80023AD98 /* ThemeStyleSettingsViewCell.swift */,
+				493DC2F529A146C80023AD98 /* ThemeStyleSettingsViewCellViewModel.swift */,
+			);
+			path = ThemeStyleSettingsTableViewCell;
 			sourceTree = "<group>";
 		};
 		499D2493299E173D0080E6F3 = {
@@ -265,16 +296,21 @@
 				499D24A0299E173D0080E6F3 /* AppDelegate.swift in Sources */,
 				491D0DFF299E517C002F5EB4 /* KeyboardButtonStyle.swift in Sources */,
 				491D0DFD299E5171002F5EB4 /* KeyboardButtonLayout.swift in Sources */,
+				493DC2F629A146C80023AD98 /* ThemeStyleSettingsViewCellViewModel.swift in Sources */,
 				49D8746629A0D11D004CFCE2 /* ThemeStyles.swift in Sources */,
 				499D24A2299E173D0080E6F3 /* SceneDelegate.swift in Sources */,
 				4914F049299E216A0006A9D6 /* UIColor.swift in Sources */,
 				4962B501299FDEA500562711 /* KeyboardButtons.swift in Sources */,
 				491D0DF3299E2865002F5EB4 /* String.swift in Sources */,
+				493DC2F129A103100023AD98 /* KeyboardSettingsViewCellViewModel.swift in Sources */,
+				493C371B29A2791900D00C97 /* SettingsSection.swift in Sources */,
 				491D0DF5299E286F002F5EB4 /* Double.swift in Sources */,
 				493DC2EA29A0F5B70023AD98 /* SettingsViewController.swift in Sources */,
 				491D0DEE299E245A002F5EB4 /* Calculator.swift in Sources */,
+				493DC2EF29A0FD860023AD98 /* KeyboardSettingsViewCell.swift in Sources */,
 				49D8746829A0D8D7004CFCE2 /* UserSettings.swift in Sources */,
 				491D0DF9299E50E1002F5EB4 /* KeyboardButtonViewCell.swift in Sources */,
+				493DC2F429A146B80023AD98 /* ThemeStyleSettingsViewCell.swift in Sources */,
 				491D0DFB299E5104002F5EB4 /* KeyboardButtonViewCellViewModel.swift in Sources */,
 				493DC2EC29A0F5E80023AD98 /* SettingsViewModel.swift in Sources */,
 			);
