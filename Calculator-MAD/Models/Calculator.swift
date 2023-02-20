@@ -18,11 +18,6 @@ final class Calculator {
     private(set) var currentNumber: String
     private(set) var fullExpression: String
     
-    init() {
-        currentNumber = CalculatorData.shared.result
-        fullExpression = CalculatorData.shared.expression
-    }
-    
     private var isTransition = false
     
     private var isFirstNumber: Bool {
@@ -36,60 +31,11 @@ final class Calculator {
         return false
     }
     
-    private var result: Double? {
-        secondNumber = currentNumber.toDouble
-        
-        guard let firstNumber = firstNumber else { return nil }
-        guard let secondNumber = secondNumber else { return nil }
-        guard let operation = operation else { return nil }
-
-        let result: Double?
-        switch operation {
-        case "+":
-            result = firstNumber + secondNumber
-        case "-":
-            result = firstNumber - secondNumber
-        case "×":
-            result = firstNumber * secondNumber
-        case "÷":
-            guard secondNumber.rightType != "0" else { return nil }
-            result = firstNumber / secondNumber
-        default:
-            return nil
-        }
-
-        resetData()
-        guard let result = result else { return nil }
-        
-        currentNumber = result.rightType
-        fullExpression = "\(firstNumber.rightType) \(operation) \(secondNumber.rightType)"
-        
-        CalculatorData.shared.saveResult(result: result.rightType, expression: fullExpression)
-        
-        return result
-    }
+    // MARK: - Inits
     
-    private var percent: (String, String)? {
-        if (firstNumber == nil || ["÷", "×"].contains(operation)) {
-            let number = currentNumber.toDouble
-            guard var number = number else { return nil }
-            
-            number /= 100
-            currentNumber = String(number)
-            fullExpression = "\((number * 100).rightType)%"
-            
-            CalculatorData.shared.saveResult(result: number.rightType, expression: fullExpression)
-            
-            return (number.rightType, fullExpression)
-        }
-        let number = currentNumber.toDouble
-        
-        guard var number = number else { return nil }
-        guard let firstNumber = firstNumber else { return nil }
-        
-        number = firstNumber / 100 * number
-        currentNumber = String(number)
-        return (number.rightType, "")
+    init() {
+        currentNumber = CalculatorData.shared.result
+        fullExpression = CalculatorData.shared.expression
     }
     
     // MARK: - Public methods
@@ -124,7 +70,7 @@ final class Calculator {
         }
         
         if (!currentNumber.isEmpty) {
-            let resultNumber = self.result
+            let resultNumber = self.caclulateResult()
             guard let result = resultNumber else { return nil }
 
             self.operation = currentOperation
@@ -158,11 +104,27 @@ final class Calculator {
         CalculatorData.shared.saveResult(result: currentNumber, expression: fullExpression)
     }
     
+    func checkDivisionByZero() -> Bool {
+        guard isDivisionByZero else { return false }
+        currentNumber = ""
+        return true
+    }
+    
     func deleteLastDigit() -> String? {
         guard !currentNumber.isEmpty else { return nil}
         
         currentNumber.removeLast()
         return currentNumber
+    }
+    
+    func getResult() -> (String, String)? {
+        guard let result = caclulateResult() else { return nil }
+        return (result.rightType, fullExpression)
+    }
+    
+    func getPercent() -> (String, String)? {
+        guard let (percent, fullExpression) = calculatePercent() else { return nil }
+        return (percent, fullExpression)
     }
     
     func getFullExpression() -> String? {
@@ -172,19 +134,61 @@ final class Calculator {
         return "\(firstNumber.rightType) \(operation) \(secondNumber.rightType)"
     }
     
-    func getPercent() -> (String, String)? {
-        guard let (percent, fullExpression) = percent else { return nil }
-        return (percent, fullExpression)
+    // MARK: - Private methods
+    
+    private func calculatePercent() -> (String, String)? {
+        if (firstNumber == nil || ["÷", "×"].contains(operation)) {
+            let number = currentNumber.toDouble
+            guard var number = number else { return nil }
+            
+            number /= 100
+            currentNumber = String(number)
+            fullExpression = "\((number * 100).rightType)%"
+            
+            CalculatorData.shared.saveResult(result: number.rightType, expression: fullExpression)
+            
+            return (number.rightType, fullExpression)
+        }
+        let number = currentNumber.toDouble
+        
+        guard var number = number else { return nil }
+        guard let firstNumber = firstNumber else { return nil }
+        
+        number = firstNumber / 100 * number
+        currentNumber = String(number)
+        return (number.rightType, "")
     }
     
-    func getResult() -> (String, String)? {
+    private func caclulateResult() -> Double? {
+        secondNumber = currentNumber.toDouble
+        
+        guard let firstNumber = firstNumber else { return nil }
+        guard let secondNumber = secondNumber else { return nil }
+        guard let operation = operation else { return nil }
+
+        let result: Double?
+        switch operation {
+        case "+":
+            result = firstNumber + secondNumber
+        case "-":
+            result = firstNumber - secondNumber
+        case "×":
+            result = firstNumber * secondNumber
+        case "÷":
+            guard secondNumber.rightType != "0" else { return nil }
+            result = firstNumber / secondNumber
+        default:
+            return nil
+        }
+
+        resetData()
         guard let result = result else { return nil }
-        return (result.rightType, fullExpression)
-    }
-    
-    func checkDivisionByZero() -> Bool {
-        guard isDivisionByZero else { return false }
-        currentNumber = ""
-        return true
+        
+        currentNumber = result.rightType
+        fullExpression = "\(firstNumber.rightType) \(operation) \(secondNumber.rightType)"
+        
+        CalculatorData.shared.saveResult(result: result.rightType, expression: fullExpression)
+        
+        return result
     }
 }

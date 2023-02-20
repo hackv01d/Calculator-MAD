@@ -16,11 +16,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleResultTitle
         case .green:
-            return nil
+            return .greenResultTitle
         case .blue:
-            return nil
+            return .blueResultTitle
         case .orange:
-            return nil
+            return .orangeResultTitle
         }
     }
     
@@ -29,11 +29,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleExpressionTitle
         case .green:
-            return nil
+            return .greenExpressionTitle
         case .blue:
-            return nil
+            return .blueExpressionTitle
         case .orange:
-            return nil
+            return .orangeExpressionTitle
         }
     }
     
@@ -42,11 +42,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleCommandButton
         case .green:
-            return nil
+            return .greenCommandButton
         case .blue:
-            return nil
+            return .blueCommandButton
         case .orange:
-            return nil
+            return .orangeCommandButton
         }
     }
     
@@ -55,11 +55,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleSecondaryCommandButton
         case .green:
-            return nil
+            return .greenSecondaryCommandButton
         case .blue:
-            return nil
+            return .blueSecondaryCommandButton
         case .orange:
-            return nil
+            return .orangeSecondaryCommandButton
         }
     }
     
@@ -68,11 +68,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleOperationButton
         case .green:
-            return nil
+            return .greenOperationButton
         case .blue:
-            return nil
+            return .blueOperationButton
         case .orange:
-            return nil
+            return .orangeOperationButton
         }
     }
     
@@ -81,11 +81,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleSecondaryOperationButton
         case .green:
-            return nil
+            return .greenSecondaryOperationButton
         case .blue:
-            return nil
+            return .blueSecondaryOperationButton
         case .orange:
-            return nil
+            return .orangeSecondaryOperationButton
         }
     }
     
@@ -94,11 +94,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleCommandButtonTitle
         case .green:
-            return nil
+            return .greenCommandButtonTitle
         case .blue:
-            return nil
+            return .blueCommandButtonTitle
         case .orange:
-            return nil
+            return .orangeCommandButtonTitle
         }
     }
     
@@ -107,11 +107,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleOperationButtonTitle
         case .green:
-            return nil
+            return .greenOperationButtonTitle
         case .blue:
-            return nil
+            return .blueOperationButtonTitle
         case .orange:
-            return nil
+            return .orangeOperationButtonTitle
         }
     }
     
@@ -120,11 +120,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleCommandButton
         case .green:
-            return nil
+            return .greenCommandButton
         case .blue:
-            return nil
+            return .blueCommandButton
         case .orange:
-            return nil
+            return .orangeCommandButton
         }
     }
     
@@ -133,11 +133,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleSelectedOperationButton
         case .green:
-            return nil
+            return .greenSelectedOperationButton
         case .blue:
-            return nil
+            return .blueSelectedOperationButton
         case .orange:
-            return nil
+            return .orangeSelectedOperationButton
         }
     }
     
@@ -146,11 +146,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleCommandButtonTitle
         case .green:
-            return nil
+            return .greenCommandButtonTitle
         case .blue:
-            return nil
+            return .blueCommandButtonTitle
         case .orange:
-            return nil
+            return .orangeCommandButtonTitle
         }
     }
     
@@ -159,11 +159,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleSelectedOperationTitle
         case .green:
-            return nil
+            return .greenSelectedOperationTitle
         case .blue:
-            return nil
+            return .blueSelectedOperationTitle
         case .orange:
-            return nil
+            return .orangeSelectedOperationTitle
         }
     }
     
@@ -172,11 +172,11 @@ enum ThemeStyles: String, CaseIterable {
         case .purple:
             return .purpleErrorTitle
         case .green:
-            return nil
+            return .greenErrorTitle
         case .blue:
-            return nil
+            return .blueErrorTitle
         case .orange:
-            return nil
+            return .orangeErrorTitle
         }
     }
 }

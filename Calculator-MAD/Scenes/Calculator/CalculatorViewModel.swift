@@ -105,19 +105,14 @@ final class CalculatorViewModel {
         }
     }
     
-    private func reset() {
-        model.resetData()
-        updateResult?("0")
-        updateExpression?("")
+    private func addPlusMinus() {
+        guard let value = model.changeSign() else { return }
+        updateResult?(value.replaceDecimal)
     }
     
     private func addDigit(_ title: String) {
         guard let value = model.addNewDigit(digit: title) else { return }
-        updateResult?(value.replaceDecimal)
-    }
-    
-    private func addPlusMinus() {
-        guard let value = model.changeSign() else { return }
+        if value.count == 1 { updateThemeStyle?(themeStyle) }
         updateResult?(value.replaceDecimal)
     }
     
@@ -149,6 +144,13 @@ final class CalculatorViewModel {
         
         showCalculateError?("Error", themeStyle)
         return true
+    }
+    
+    private func reset() {
+        model.resetData()
+        updateThemeStyle?(themeStyle)
+        updateResult?("0")
+        updateExpression?("")
     }
     
     private func updateCellViewModels() {

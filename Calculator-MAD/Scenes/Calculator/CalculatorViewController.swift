@@ -28,7 +28,6 @@ class CalculatorViewController: UIViewController {
     
     private let viewModel: CalculatorViewModel
     
-    
     init(with viewModel: CalculatorViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -227,7 +226,7 @@ private extension CalculatorViewController {
         
         viewModel.updateThemeStyle = { [weak self] themeStyle in
             self?.resultCalculatedLabel.textColor = themeStyle.resultTitle
-            self?.fullExpressionLabel.textColor = themeStyle.resultTitle
+            self?.fullExpressionLabel.textColor = themeStyle.expressionTitle
         }
         
         viewModel.showCalculateError = { [weak self] error, themeStyle in
