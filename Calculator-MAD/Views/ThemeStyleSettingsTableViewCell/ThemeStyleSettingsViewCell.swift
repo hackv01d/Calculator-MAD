@@ -23,6 +23,11 @@ class ThemeStyleSettingsViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        accessoryType = selected ? .checkmark : .none
+    }
+    
     func configure(with viewModel: ThemeStyleSettingsViewCellViewModel) {
         titleLabel.text = viewModel.themeTitle
         previewImageView.image = UIImage(named: "\(viewModel.themeTitle)")

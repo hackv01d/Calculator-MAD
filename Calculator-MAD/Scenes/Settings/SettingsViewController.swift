@@ -122,7 +122,7 @@ extension SettingsViewController: UITableViewDataSource {
             }
             
             cell.configure(with: viewModel.keyboardSettingsViewModels[indexPath.item])
-            cell.accessoryView = indexPath.item == 0 ? setupSoundAccessorySwitch() : setupHapticAccessorySwitch()
+            cell.accessoryView = indexPath.row == 0 ? setupSoundAccessorySwitch() : setupHapticAccessorySwitch()
             return cell
         case .theme:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ThemeStyleSettingsViewCell.identifier, for: indexPath) as? ThemeStyleSettingsViewCell else {
@@ -133,10 +133,15 @@ extension SettingsViewController: UITableViewDataSource {
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard viewModel.themeIsSelected(indexPath) else { return }
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    }
 }
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        viewModel.changeThemeStyle(at: indexPath)
     }
 }

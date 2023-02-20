@@ -213,6 +213,10 @@ extension CalculatorViewController: UICollectionViewDelegate {
 
 private extension CalculatorViewController {
     private func bindToViewModel() {
+        viewModel.updateCollection = { [weak self] in
+            self?.keyboardCollection.reloadData()
+        }
+        
         viewModel.updateResult = { [weak self] result in
             self?.resultCalculatedLabel.text = result
         }

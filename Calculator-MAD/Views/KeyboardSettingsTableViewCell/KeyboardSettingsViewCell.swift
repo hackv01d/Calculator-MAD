@@ -12,7 +12,6 @@ class KeyboardSettingsViewCell: UITableViewCell {
     static let identifier = "KeyboardSettingsViewCell"
     
     private let settingTitleLabel = UILabel()
-    private let switchSetting = UISwitch()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,15 +44,6 @@ class KeyboardSettingsViewCell: UITableViewCell {
         settingTitleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
-        }
-    }
-    
-    private func setupSwitchSetting() {
-        addSubview(switchSetting)
-
-        switchSetting.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(20)
         }
     }
 }

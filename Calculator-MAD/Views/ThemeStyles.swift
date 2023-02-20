@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum ThemeStyles: String {
+enum ThemeStyles: String, CaseIterable {
     case purple, green, blue, orange
     
     var resultTitle: UIColor? {

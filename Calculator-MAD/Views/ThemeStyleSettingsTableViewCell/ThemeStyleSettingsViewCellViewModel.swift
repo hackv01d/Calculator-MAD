@@ -14,5 +14,4 @@ final class ThemeStyleSettingsViewCellViewModel {
     init(themeTitle: String) {
         self.themeTitle = themeTitle
     }
-    
 }

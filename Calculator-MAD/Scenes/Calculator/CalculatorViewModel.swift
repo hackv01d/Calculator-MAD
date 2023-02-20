@@ -11,14 +11,15 @@ import AudioToolbox
 
 final class CalculatorViewModel {
     
+    var updateCollection: (() -> Void)?
     var updateResult: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
     var showCalculateError: ((String) -> Void)?
     var didGoToSettingsScreen: ((UINavigationController) -> Void)?
-
-    var cellViewModels: [KeyboardButtonViewCellViewModel] = []
+    
     
     private(set) var header = "Calculator"
+    private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
     
     private var isSoundKeyboard: Bool {
         didSet {
@@ -31,7 +32,18 @@ final class CalculatorViewModel {
         }
     }
     
-    private(set) var themeStyle: ThemeStyles
+    private(set) var themeStyle: ThemeStyles {
+        didSet {
+            updateCellViewModels()
+        }
+    }
+    
+    var cellViewModels: [KeyboardButtonViewCellViewModel] = [] {
+        didSet {
+            updateCollection?()
+        }
+    }
+    
     private let keyboardButtons: [KeyboardButtons] = [
         .allClear, .plusMinus, .percent, .divide,
         .digit(7), .digit(8), .digit(9), .multiply,
@@ -39,7 +51,6 @@ final class CalculatorViewModel {
         .digit(1), .digit(2), .digit(3), .plus,
         .digit(0), .decimal, .equal
     ]
-    private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
     
     private let model: Calculator
 
@@ -48,9 +59,7 @@ final class CalculatorViewModel {
         self.themeStyle = UserSettings.shared.themeStyle
         isSoundKeyboard = UserSettings.shared.isSoundKeyboard
         isHapticKeyboard = UserSettings.shared.isHapticKeyboard
-        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title,
-                                                                                    isOperation: $0.isOperation,
-                                                                                    themeStyle: themeStyle) }
+        updateCellViewModels()
     }
     
     func getInitialResult() -> String {
@@ -99,6 +108,11 @@ final class CalculatorViewModel {
         updateExpression?("")
     }
     
+    private func addDigit(_ title: String) {
+        guard let value = model.addNewDigit(digit: title) else { return }
+        updateResult?(value.replaceDecimal)
+    }
+    
     private func addPlusMinus() {
         guard let value = model.changeSign() else { return }
         updateResult?(value.replaceDecimal)
@@ -127,16 +141,17 @@ final class CalculatorViewModel {
         updateExpression?(expression.replaceDecimal)
     }
     
-    private func addDigit(_ title: String) {
-        guard let value = model.addNewDigit(digit: title) else { return }
-        updateResult?(value.replaceDecimal)
-    }
-    
     private func isDivisionError() -> Bool {
         guard model.checkDivisionByZero() else { return false }
         
         showCalculateError?("Error")
         return true
+    }
+    
+    private func updateCellViewModels() {
+        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title,
+                                                                                    isOperation: $0.isOperation,
+                                                                                    themeStyle: themeStyle) }
     }
 }
 
@@ -147,6 +162,10 @@ extension CalculatorViewModel: SettingsViewModelDelegate {
     
     func toggleHapticKeyboard() {
         isHapticKeyboard = !isHapticKeyboard
+    }
+    
+    func updateThemeStyle(_ themeStyle: ThemeStyles) {
+        self.themeStyle = themeStyle
     }
 }
 
