@@ -7,18 +7,42 @@
 
 import Foundation
 
+protocol SettingsViewModelDelegate: AnyObject {
+    func toggleSoundKeyboard()
+    func toggleHapticKeyboard()
+}
+
 final class SettingsViewModel {
     
     var keyboardSettingsViewModels: [KeyboardSettingsViewCellViewModel]
     var themeStyleSettingsViewModels: [ThemeStyleSettingsViewCellViewModel]
+    weak var delegate: SettingsViewModelDelegate?
     
     private let settingsSections = SettingsSection.allCases
-    private let keyboardSettings = SettingsSection.keyboard
-    private let themeStyleSettings = SettingsSection.theme
     
     init() {
-        keyboardSettingsViewModels = keyboardSettings.items.map { KeyboardSettingsViewCellViewModel(settingTitle: $0) }
-        themeStyleSettingsViewModels = themeStyleSettings.items.map { ThemeStyleSettingsViewCellViewModel(themeTitle: $0) }
+        keyboardSettingsViewModels = SettingsSection.keyboard.items.map { KeyboardSettingsViewCellViewModel(settingTitle: $0) }
+        themeStyleSettingsViewModels = SettingsSection.theme.items.map { ThemeStyleSettingsViewCellViewModel(themeTitle: $0) }
+    }
+    
+    func switchSound() {
+        delegate?.toggleSoundKeyboard()
+    }
+    
+    func switchHaptic() {
+        delegate?.toggleHapticKeyboard()
+    }
+    
+    func isSound() -> Bool {
+        return UserSettings.shared.isSoundKeyboard
+    }
+    
+    func isHaptic() -> Bool {
+        return UserSettings.shared.isHapticKeyboard
+    }
+    
+    func getSection(at index: Int) -> SettingsSection? {
+        return SettingsSection(rawValue: index)
     }
     
     func getNumberOfSections() -> Int {
@@ -33,17 +57,25 @@ final class SettingsViewModel {
         return settingsSections[section].title
     }
     
-    func shouldHighlightRow(in section: Int) -> Bool {
+    func getHeightForRow(at index: Int) -> CGFloat {
+        guard let section = SettingsSection(rawValue: index) else { return 60 }
+        
         switch section {
-        case 0: return false
-        default: return true
+        case .keyboard:
+            return 50
+        case .theme:
+            return 60
         }
     }
     
-    func getHeightForRow(at section: Int) -> CGFloat {
+    func shouldHighlightRow(at index: Int) -> Bool {
+        guard let section = SettingsSection(rawValue: index) else { return false }
+        
         switch section {
-        case 0: return 50
-        default: return 70
+        case .keyboard:
+            return false
+        case .theme:
+            return true
         }
     }
 }

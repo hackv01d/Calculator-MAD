@@ -48,7 +48,7 @@ class ThemeStyleSettingsViewCell: UITableViewCell {
         previewImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
-            make.height.width.equalTo(60)
+            make.height.width.equalTo(50)
         }
     }
     

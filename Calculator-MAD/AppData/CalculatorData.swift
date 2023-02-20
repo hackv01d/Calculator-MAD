@@ -23,11 +23,7 @@ final class CalculatorData {
     var result: String {
         get {
             let key = CalculatorDataKeys.result.rawValue
-            guard let result = standard.string(forKey: key) else {
-                let initialResult = "17018"
-                standard.set(initialResult, forKey: key)
-                return initialResult
-            }
+            guard let result = standard.string(forKey: key) else { return "17018" }
             return result
         } set {
             standard.set(newValue, forKey: CalculatorDataKeys.result.rawValue)
@@ -37,11 +33,7 @@ final class CalculatorData {
     var expression: String {
         get {
             let key = CalculatorDataKeys.expression.rawValue
-            guard let expression = standard.string(forKey: key) else {
-                let initialExpression = "9204 + 7814"
-                standard.set(initialExpression, forKey: key)
-                return initialExpression
-            }
+            guard let expression = standard.string(forKey: key) else { return "9204 + 7814"}
             return expression
         } set {
             standard.set(newValue, forKey: CalculatorDataKeys.expression.rawValue)

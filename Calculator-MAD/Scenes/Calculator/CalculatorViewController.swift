@@ -200,6 +200,7 @@ extension CalculatorViewController: UICollectionViewDataSource {
         }
         
         cell.configure(with: viewModel.cellViewModels[indexPath.item])
+        cell.delegate = viewModel
         return cell
     }
 }
@@ -227,6 +228,7 @@ private extension CalculatorViewController {
         
         viewModel.didGoToSettingsScreen = { [weak self] navController in
             navController.overrideUserInterfaceStyle = .dark
+            navController.modalPresentationStyle = .formSheet
             self?.present(navController, animated: true)
         }
     }

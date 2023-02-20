@@ -10,7 +10,6 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     private let settingsTableView = UITableView(frame: .zero, style: .insetGrouped)
-    
     private let viewModel: SettingsViewModel
     
     init(with viewModel: SettingsViewModel) {
@@ -25,14 +24,29 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Settings"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: nil)
         
         setup()
+    }
+    
+    @objc
+    private func handleDoneBarButton() {
+        dismiss(animated: true)
+    }
+    
+    @objc
+    private func handleSoundAccessorySwitch() {
+        viewModel.switchSound()
+    }
+    
+    @objc
+    private func handleHapticAccessorySwitch() {
+        viewModel.switchHaptic()
     }
 
     private func setup() {
         setupSuperView()
         setupSettingsTableView()
+        setupDoneBarButtonItem()
     }
     
     private func setupSuperView() {
@@ -42,7 +56,6 @@ class SettingsViewController: UIViewController {
     private func setupSettingsTableView() {
         view.addSubview(settingsTableView)
         
-        settingsTableView.estimatedRowHeight = 70
         settingsTableView.separatorStyle = .singleLine
         settingsTableView.separatorColor = .appGray
         settingsTableView.backgroundColor = .clear
@@ -56,13 +69,27 @@ class SettingsViewController: UIViewController {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    private func setupDoneBarButtonItem() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDoneBarButton))
+    }
+    
+    private func setupSoundAccessorySwitch() -> UISwitch {
+        let toggleSoundSwitch = UISwitch()
+        toggleSoundSwitch.setOn(viewModel.isSound(), animated: true)
+        toggleSoundSwitch.addTarget(self, action: #selector(handleSoundAccessorySwitch), for: .valueChanged)
+        return toggleSoundSwitch
+    }
+    
+    private func setupHapticAccessorySwitch() -> UISwitch {
+        let toggleHapticSwitch = UISwitch()
+        toggleHapticSwitch.setOn(viewModel.isHaptic(), animated: true)
+        toggleHapticSwitch.addTarget(self, action: #selector(handleHapticAccessorySwitch), for: .valueChanged)
+        return toggleHapticSwitch
+    }
 }
 
 extension SettingsViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        viewModel.shouldHighlightRow(in: indexPath.section)
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.getNumberOfSections()
@@ -80,17 +107,24 @@ extension SettingsViewController: UITableViewDataSource {
         return viewModel.getTitleSection(section)
     }
     
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        viewModel.shouldHighlightRow(at: indexPath.section)
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        guard let section = viewModel.getSection(at: indexPath.section) else { return UITableViewCell() }
+        
+        switch section {
+        case .keyboard:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: KeyboardSettingsViewCell.identifier, for: indexPath) as? KeyboardSettingsViewCell else {
                 return KeyboardSettingsViewCell()
             }
             
             cell.configure(with: viewModel.keyboardSettingsViewModels[indexPath.item])
-            cell.accessoryView = UISwitch()
+            cell.accessoryView = indexPath.item == 0 ? setupSoundAccessorySwitch() : setupHapticAccessorySwitch()
             return cell
-        } else {
+        case .theme:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ThemeStyleSettingsViewCell.identifier, for: indexPath) as? ThemeStyleSettingsViewCell else {
                 return ThemeStyleSettingsViewCell()
             }
@@ -102,5 +136,7 @@ extension SettingsViewController: UITableViewDataSource {
 }
 
 extension SettingsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AudioToolbox
 
 final class CalculatorViewModel {
     
@@ -14,10 +15,22 @@ final class CalculatorViewModel {
     var updateExpression: ((String) -> Void)?
     var showCalculateError: ((String) -> Void)?
     var didGoToSettingsScreen: ((UINavigationController) -> Void)?
-    
+
     var cellViewModels: [KeyboardButtonViewCellViewModel] = []
     
     private(set) var header = "Calculator"
+    
+    private var isSoundKeyboard: Bool {
+        didSet {
+            UserSettings.shared.isSoundKeyboard = isSoundKeyboard
+        }
+    }
+    private var isHapticKeyboard: Bool {
+        didSet {
+            UserSettings.shared.isHapticKeyboard = isHapticKeyboard
+        }
+    }
+    
     private(set) var themeStyle: ThemeStyles
     private let keyboardButtons: [KeyboardButtons] = [
         .allClear, .plusMinus, .percent, .divide,
@@ -26,13 +39,18 @@ final class CalculatorViewModel {
         .digit(1), .digit(2), .digit(3), .plus,
         .digit(0), .decimal, .equal
     ]
+    private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
     
     private let model: Calculator
 
     init(with model: Calculator) {
         self.model = model
         self.themeStyle = UserSettings.shared.themeStyle
-        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title, isOperation: $0.isOperation, themeStyle: themeStyle) }
+        isSoundKeyboard = UserSettings.shared.isSoundKeyboard
+        isHapticKeyboard = UserSettings.shared.isHapticKeyboard
+        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title,
+                                                                                    isOperation: $0.isOperation,
+                                                                                    themeStyle: themeStyle) }
     }
     
     func getInitialResult() -> String {
@@ -50,6 +68,7 @@ final class CalculatorViewModel {
     
     func showSettingsScreen() {
         let viewModel = SettingsViewModel()
+        viewModel.delegate = self
         let viewController = SettingsViewController(with: viewModel)
         let navController = UINavigationController(rootViewController: viewController)
         didGoToSettingsScreen?(navController)
@@ -118,6 +137,31 @@ final class CalculatorViewModel {
         
         showCalculateError?("Error")
         return true
+    }
+}
+
+extension CalculatorViewModel: SettingsViewModelDelegate {
+    func toggleSoundKeyboard() {
+        isSoundKeyboard = !isSoundKeyboard
+    }
+    
+    func toggleHapticKeyboard() {
+        isHapticKeyboard = !isHapticKeyboard
+    }
+}
+
+extension CalculatorViewModel: KeyboardButtonViewCellDelegate {
+    func playSound(_ isHighlighted: Bool) {
+        guard isHighlighted, isSoundKeyboard else { return }
+        
+        AudioServicesPlaySystemSound(1104)
+    }
+    
+    func generateHaptic(_ isHighlighted: Bool) {
+        guard isHighlighted, isHapticKeyboard else { return }
+        
+        impactFeedbackgenerator.prepare()
+        impactFeedbackgenerator.impactOccurred()
     }
 }
 

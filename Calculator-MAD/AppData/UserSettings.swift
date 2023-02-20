@@ -17,6 +17,8 @@ final class UserSettings {
     
     private enum UserSettingsKeys: String {
         case themeStyle
+        case isSoundKeyboard
+        case isHapticKeyboard
     }
     
     var themeStyle: ThemeStyles {
@@ -27,6 +29,24 @@ final class UserSettings {
             return themeStyle
         } set {
             standard.setValue(newValue.rawValue, forKey: UserSettingsKeys.themeStyle.rawValue)
+        }
+    }
+    
+    var isSoundKeyboard: Bool {
+        get {
+            let key = UserSettingsKeys.isSoundKeyboard.rawValue
+            return standard.bool(forKey: key)
+        } set {
+            standard.set(newValue, forKey: UserSettingsKeys.isSoundKeyboard.rawValue)
+        }
+    }
+    
+    var isHapticKeyboard: Bool {
+        get {
+            let key = UserSettingsKeys.isHapticKeyboard.rawValue
+            return standard.bool(forKey: key)
+        } set {
+            standard.set(newValue, forKey: UserSettingsKeys.isHapticKeyboard.rawValue)
         }
     }
 }

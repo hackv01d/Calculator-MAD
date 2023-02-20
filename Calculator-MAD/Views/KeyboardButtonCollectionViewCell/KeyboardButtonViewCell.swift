@@ -7,16 +7,24 @@
 
 import UIKit
 
+protocol KeyboardButtonViewCellDelegate: AnyObject {
+    func playSound(_ isHighlighted: Bool)
+    func generateHaptic(_ isHighlighted: Bool)
+}
+
 final class KeyboardButtonViewCell: UICollectionViewCell {
     
     static let identifier = "KeyboardButtonViewCell"
     
+    weak var delegate: KeyboardButtonViewCellDelegate?
     private let keyboardButtonLabel = UILabel()
     private var style: KeyboardButtonStyle?
     
     override var isHighlighted: Bool {
         didSet {
             updateAppearance()
+            delegate?.playSound(isHighlighted)
+            delegate?.generateHaptic(isHighlighted)
         }
     }
     
@@ -34,6 +42,7 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func configure(with viewModel: KeyboardButtonViewCellViewModel) {
         backgroundColor = viewModel.style.primaryBackgroundColor

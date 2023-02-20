@@ -30,7 +30,6 @@ class KeyboardSettingsViewCell: UITableViewCell {
     private func setup() {
         setupSuperView()
         setupSettingTitleLabel()
-//        setupSwitchSetting()
     }
     
     private func setupSuperView() {

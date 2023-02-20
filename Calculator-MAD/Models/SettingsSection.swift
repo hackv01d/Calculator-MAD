@@ -7,12 +7,7 @@
 
 import Foundation
 
-//struct SettingsTableViewSection {
-//    let title: String
-//    let items: [String]
-//}
-
-enum SettingsSection: CaseIterable {
+enum SettingsSection: Int, CaseIterable {
     case keyboard, theme
     
     var title: String {
