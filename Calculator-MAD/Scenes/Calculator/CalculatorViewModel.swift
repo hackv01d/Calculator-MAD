@@ -12,9 +12,10 @@ import AudioToolbox
 final class CalculatorViewModel {
     
     var updateCollection: (() -> Void)?
+    var updateThemeStyle: ((ThemeStyles) -> Void)?
     var updateResult: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
-    var showCalculateError: ((String) -> Void)?
+    var showCalculateError: ((String, ThemeStyles) -> Void)?
     var didGoToSettingsScreen: ((UINavigationController) -> Void)?
     
     
@@ -34,7 +35,9 @@ final class CalculatorViewModel {
     
     private(set) var themeStyle: ThemeStyles {
         didSet {
+            UserSettings.shared.themeStyle = themeStyle
             updateCellViewModels()
+            updateThemeStyle?(themeStyle)
         }
     }
     
@@ -144,7 +147,7 @@ final class CalculatorViewModel {
     private func isDivisionError() -> Bool {
         guard model.checkDivisionByZero() else { return false }
         
-        showCalculateError?("Error")
+        showCalculateError?("Error", themeStyle)
         return true
     }
     

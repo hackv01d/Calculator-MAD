@@ -225,9 +225,14 @@ private extension CalculatorViewController {
             self?.fullExpressionLabel.text = expression
         }
         
-        viewModel.showCalculateError = { [weak self] error in
+        viewModel.updateThemeStyle = { [weak self] themeStyle in
+            self?.resultCalculatedLabel.textColor = themeStyle.resultTitle
+            self?.fullExpressionLabel.textColor = themeStyle.resultTitle
+        }
+        
+        viewModel.showCalculateError = { [weak self] error, themeStyle in
             self?.resultCalculatedLabel.text = error
-            self?.resultCalculatedLabel.textColor = .purpleErrorTitle
+            self?.resultCalculatedLabel.textColor = themeStyle.errorTitle
         }
         
         viewModel.didGoToSettingsScreen = { [weak self] navController in
