@@ -114,7 +114,11 @@ final class Calculator {
         guard !currentNumber.isEmpty else { return nil}
         
         currentNumber.removeLast()
-        return currentNumber
+        if currentNumber.isEmpty {
+            return "0"
+        } else {
+            return currentNumber
+        }
     }
     
     func getResult() -> (String, String)? {

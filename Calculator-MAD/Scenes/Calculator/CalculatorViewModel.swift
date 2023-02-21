@@ -73,11 +73,6 @@ final class CalculatorViewModel {
         return model.fullExpression
     }
     
-    func removeDigit() {
-        guard let value = model.deleteLastDigit() else { return }
-        updateResult?(value.replaceDecimal)
-    }
-    
     func showSettingsScreen() {
         let viewModel = SettingsViewModel()
         viewModel.delegate = self
@@ -103,6 +98,11 @@ final class CalculatorViewModel {
         default:
             addDigit(title)
         }
+    }
+    
+    func removeDigit() {
+        guard var value = model.deleteLastDigit() else { return }
+        updateResult?(value.replaceDecimal)
     }
     
     private func addPlusMinus() {
