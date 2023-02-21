@@ -48,6 +48,7 @@ final class Calculator {
         if (digit != "." && currentNumber == "0") {
             currentNumber.removeAll()
         }
+        
         if (currentNumber == "-0" && digit != ".") {
             currentNumber = "-" + digit
         } else if (isFirstNumber && !isTransition) {
@@ -57,6 +58,7 @@ final class Calculator {
         } else {
             currentNumber += digit
         }
+        
         return currentNumber
     }
     
@@ -94,16 +96,6 @@ final class Calculator {
         return currentNumber
     }
     
-    func resetData() {
-        self.firstNumber = nil
-        self.secondNumber = nil
-        self.operation = nil
-        self.isTransition = false
-        self.currentNumber = "0"
-        fullExpression = ""
-        CalculatorData.shared.saveResult(result: currentNumber, expression: fullExpression)
-    }
-    
     func checkDivisionByZero() -> Bool {
         guard isDivisionByZero else { return false }
         currentNumber = ""
@@ -119,6 +111,16 @@ final class Calculator {
         } else {
             return currentNumber
         }
+    }
+    
+    func resetData() {
+        self.firstNumber = nil
+        self.secondNumber = nil
+        self.operation = nil
+        self.isTransition = false
+        self.currentNumber = "0"
+        fullExpression = ""
+        CalculatorData.shared.saveResult(result: currentNumber, expression: fullExpression)
     }
     
     func getResult() -> (String, String)? {
