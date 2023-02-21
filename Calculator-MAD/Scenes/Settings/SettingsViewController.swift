@@ -9,8 +9,12 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    // MARK: - Private properties
+    
     private let settingsTableView = UITableView(frame: .zero, style: .insetGrouped)
     private let viewModel: SettingsViewModel
+    
+    // MARK: - Inits
     
     init(with viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -21,12 +25,16 @@ class SettingsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Settings"
         
         setup()
     }
+    
+    // MARK: - Actions
     
     @objc
     private func handleDoneBarButton() {
@@ -42,6 +50,8 @@ class SettingsViewController: UIViewController {
     private func handleHapticAccessorySwitch() {
         viewModel.switchHaptic()
     }
+    
+    //  MARK: - Setup
 
     private func setup() {
         setupSuperView()
@@ -88,6 +98,8 @@ class SettingsViewController: UIViewController {
         return toggleHapticSwitch
     }
 }
+
+// MARK: - UITableViewDataSource
 
 extension SettingsViewController: UITableViewDataSource {
     
@@ -139,6 +151,8 @@ extension SettingsViewController: UITableViewDataSource {
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

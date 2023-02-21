@@ -11,8 +11,12 @@ class ThemeStyleSettingsViewCell: UITableViewCell {
     
     static let identifier = "ThemeStyleSettingsViewCell"
     
+    // MARK: - Private properties
+    
     private let previewImageView = UIImageView()
     private let titleLabel = UILabel()
+    
+    // MARK: - Inits
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,15 +27,21 @@ class ThemeStyleSettingsViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        accessoryType = selected ? .checkmark : .none
-    }
+    // MARK: - Сonfigure
     
     func configure(with viewModel: ThemeStyleSettingsViewCellViewModel) {
         titleLabel.text = viewModel.themeTitle
         previewImageView.image = UIImage(named: "\(viewModel.themeTitle)")
     }
+    
+    // MARK: - Override methods
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        accessoryType = selected ? .checkmark : .none
+    }
+    
+    //  MARK: - Setup
     
     private func setup() {
         setupSuperView()
@@ -62,7 +72,7 @@ class ThemeStyleSettingsViewCell: UITableViewCell {
         
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 22)
+        titleLabel.font = UIFont.systemFont(ofSize: 20)
         
         titleLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()

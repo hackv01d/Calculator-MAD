@@ -15,13 +15,19 @@ protocol SettingsViewModelDelegate: AnyObject {
 
 final class SettingsViewModel {
     
+    // MARK: - Public properties
+    
     var keyboardSettingsViewModels = [KeyboardSettingsViewCellViewModel]()
     var themeStyleSettingsViewModels = [ThemeStyleSettingsViewCellViewModel]()
     weak var delegate: SettingsViewModelDelegate?
     
+    // MARK: - Private properties
+    
     private let settingsSections = SettingsSection.allCases
     private let themeStyles = ThemeStyles.allCases
     private var activeThemeStyle: ThemeStyles
+    
+    // MARK: - Inits
     
     init() {
         activeThemeStyle = UserSettings.shared.themeStyle
@@ -29,10 +35,7 @@ final class SettingsViewModel {
         themeStyleSettingsViewModels = SettingsSection.theme.items.map { ThemeStyleSettingsViewCellViewModel(themeTitle: $0) }
     }
     
-    func changeThemeStyle(at indexPath: IndexPath) {
-        guard getSection(at: indexPath.section) == .theme else { return }
-        delegate?.updateThemeStyle(themeStyles[indexPath.row])
-    }
+    // MARK: - Public methods
     
     func switchSound() {
         delegate?.toggleSoundKeyboard()
@@ -69,6 +72,11 @@ final class SettingsViewModel {
     func themeIsSelected(_ indexPath: IndexPath) -> Bool {
         guard getSection(at: indexPath.section) == .theme else { return false }
         return activeThemeStyle == themeStyles[indexPath.row]
+    }
+    
+    func changeThemeStyle(at indexPath: IndexPath) {
+        guard getSection(at: indexPath.section) == .theme else { return }
+        delegate?.updateThemeStyle(themeStyles[indexPath.row])
     }
     
     func getHeightForRow(at index: Int) -> CGFloat {

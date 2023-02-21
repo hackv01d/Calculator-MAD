@@ -16,9 +16,11 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     
     static let identifier = "KeyboardButtonViewCell"
     
+    // MARK: - Public properties
+    
     weak var delegate: KeyboardButtonViewCellDelegate?
-    private let keyboardButtonLabel = UILabel()
-    private var style: KeyboardButtonStyle?
+    
+    // MARK: - Override properties
     
     override var isHighlighted: Bool {
         didSet {
@@ -34,6 +36,13 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Private properties
+    
+    private let keyboardButtonLabel = UILabel()
+    private var style: KeyboardButtonStyle?
+    
+    // MARK: - Inits
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupKeyboardButtonLabel()
@@ -43,6 +52,7 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configure
     
     func configure(with viewModel: KeyboardButtonViewCellViewModel) {
         backgroundColor = viewModel.style.primaryBackgroundColor
@@ -51,10 +61,14 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
         style = viewModel.style
     }
     
+    // MARK: - Override methods
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = layer.frame.height / 2.7
     }
+    
+    // MARK: - Private methods
     
     private func updateAppearance() {
         backgroundColor = isHighlighted ? style?.secondaryBackgroundColor : style?.primaryBackgroundColor
@@ -64,6 +78,8 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
         backgroundColor = isSelected ? style?.selectedBackgroundColor : style?.primaryBackgroundColor
         keyboardButtonLabel.textColor = isSelected ? style?.selectedTitleColor : style?.titleColor
     }
+    
+    // MARK: - Setup
     
     private func setupKeyboardButtonLabel() {
         addSubview(keyboardButtonLabel)

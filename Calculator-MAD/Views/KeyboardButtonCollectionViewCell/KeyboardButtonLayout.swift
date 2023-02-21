@@ -11,7 +11,6 @@ class KeyboardButtonLayout: UICollectionViewFlowLayout {
     
     private var itemCache: [UICollectionViewLayoutAttributes] = []
     
-    
     override func prepare() {
         super.prepare()
         

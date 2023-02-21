@@ -10,8 +10,12 @@ import UIKit
 
 final class KeyboardButtonViewCellViewModel {
     
+    // MARK: - Private properties
+    
     private(set) var title: String
     private(set) var style: KeyboardButtonStyle
+    
+    // MARK: - Inits
     
     init(title: String, isOperation: Bool, themeStyle: ThemeStyles) {
         self.title = title

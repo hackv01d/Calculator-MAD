@@ -11,7 +11,11 @@ class KeyboardSettingsViewCell: UITableViewCell {
     
     static let identifier = "KeyboardSettingsViewCell"
     
+    // MARK: - Private properties
+    
     private let settingTitleLabel = UILabel()
+    
+    // MARK: - Inits
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,9 +26,13 @@ class KeyboardSettingsViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configure
+    
     func configure(with viewModel: KeyboardSettingsViewCellViewModel) {
         settingTitleLabel.text = viewModel.settingTitle
     }
+    
+    //  MARK: - Setup
     
     private func setup() {
         setupSuperView()

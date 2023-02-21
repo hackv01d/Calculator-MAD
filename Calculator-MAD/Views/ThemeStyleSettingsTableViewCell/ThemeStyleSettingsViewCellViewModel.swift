@@ -9,7 +9,11 @@ import Foundation
 
 final class ThemeStyleSettingsViewCellViewModel {
     
+    // MARK: - Private properties
+    
     private(set) var themeTitle: String
+    
+    // MARK: - Inits
     
     init(themeTitle: String) {
         self.themeTitle = themeTitle

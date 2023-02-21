@@ -11,13 +11,22 @@ import AudioToolbox
 
 final class CalculatorViewModel {
     
+    // MARK: - Public properties
+    
     var updateCollection: (() -> Void)?
-    var updateThemeStyle: ((ThemeStyles) -> Void)?
     var updateResult: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
+    var updateThemeStyle: ((ThemeStyles) -> Void)?
     var showCalculateError: ((String, ThemeStyles) -> Void)?
     var didGoToSettingsScreen: ((UINavigationController) -> Void)?
     
+    var cellViewModels: [KeyboardButtonViewCellViewModel] = [] {
+        didSet {
+            updateCollection?()
+        }
+    }
+    
+    // MARK: - Private properties
     
     private(set) var header = "Calculator"
     private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
@@ -41,12 +50,6 @@ final class CalculatorViewModel {
         }
     }
     
-    var cellViewModels: [KeyboardButtonViewCellViewModel] = [] {
-        didSet {
-            updateCollection?()
-        }
-    }
-    
     private let keyboardButtons: [KeyboardButtons] = [
         .allClear, .plusMinus, .percent, .divide,
         .digit(7), .digit(8), .digit(9), .multiply,
@@ -56,6 +59,8 @@ final class CalculatorViewModel {
     ]
     
     private let model: Calculator
+    
+    // MARK: - Inits
 
     init(with model: Calculator) {
         self.model = model
@@ -64,6 +69,8 @@ final class CalculatorViewModel {
         isHapticKeyboard = UserSettings.shared.isHapticKeyboard
         updateCellViewModels()
     }
+    
+    // MARK: - Public methods
     
     func getInitialResult() -> String {
         return model.currentNumber
@@ -101,9 +108,11 @@ final class CalculatorViewModel {
     }
     
     func removeDigit() {
-        guard var value = model.deleteLastDigit() else { return }
+        guard let value = model.deleteLastDigit() else { return }
         updateResult?(value.replaceDecimal)
     }
+    
+    // MARK: - Private methods
     
     private func addPlusMinus() {
         guard let value = model.changeSign() else { return }
@@ -160,6 +169,8 @@ final class CalculatorViewModel {
     }
 }
 
+// MARK: - SettingsViewModelDelegate
+
 extension CalculatorViewModel: SettingsViewModelDelegate {
     func toggleSoundKeyboard() {
         isSoundKeyboard = !isSoundKeyboard
@@ -173,6 +184,8 @@ extension CalculatorViewModel: SettingsViewModelDelegate {
         self.themeStyle = themeStyle
     }
 }
+
+// MARK: - KeyboardButtonViewCellDelegate
 
 extension CalculatorViewModel: KeyboardButtonViewCellDelegate {
     func playSound(_ isHighlighted: Bool) {

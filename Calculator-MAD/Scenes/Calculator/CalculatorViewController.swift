@@ -10,6 +10,8 @@ import SnapKit
 
 class CalculatorViewController: UIViewController {
     
+    // MARK: - Private properties
+    
     private let headerLabel = UILabel()
     private let settingsButton = UIButton()
     private let resultWindowView = UIView()
@@ -28,6 +30,8 @@ class CalculatorViewController: UIViewController {
     
     private let viewModel: CalculatorViewModel
     
+    // MARK: - Inits
+    
     init(with viewModel: CalculatorViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -37,12 +41,16 @@ class CalculatorViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
         bindToViewModel()
     }
+    
+    // MARK: - Actions
     
     @objc
     private func handleSettingsButton() {
@@ -53,6 +61,8 @@ class CalculatorViewController: UIViewController {
     private func handleDeleteDigitButton() {
         viewModel.removeDigit()
     }
+    
+    //  MARK: - Setup
     
     private func setup() {
         setupSuperView()
@@ -188,6 +198,8 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
+
 extension CalculatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.cellViewModels.count
@@ -204,11 +216,15 @@ extension CalculatorViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
+
 extension CalculatorViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.touchOnCalculatorButton(at: indexPath.item)
     }
 }
+
+// MARK: - Building ViewModel
 
 private extension CalculatorViewController {
     private func bindToViewModel() {
