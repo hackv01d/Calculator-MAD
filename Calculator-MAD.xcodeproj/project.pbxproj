@@ -42,7 +42,7 @@
 		4909518029A4EB11003E5CAD /* IMG_3042.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_3042.PNG; sourceTree = "<group>"; };
 		4909518129A4EB11003E5CAD /* IMG_3047.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_3047.PNG; sourceTree = "<group>"; };
 		4909518229A4EB11003E5CAD /* IMG_3049.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_3049.PNG; sourceTree = "<group>"; };
-		4909518629A4EEF7003E5CAD /* IMG_3045.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3045.jpeg; sourceTree = "<group>"; };
+		4909518629A4EEF7003E5CAD /* IMG_3045.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_3045.PNG; sourceTree = "<group>"; };
 		4914F048299E216A0006A9D6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		491D0DED299E245A002F5EB4 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		491D0DF0299E24B2002F5EB4 /* CalculatorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorData.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				4909518029A4EB11003E5CAD /* IMG_3042.PNG */,
-				4909518629A4EEF7003E5CAD /* IMG_3045.jpeg */,
+				4909518629A4EEF7003E5CAD /* IMG_3045.PNG */,
 				4909517D29A4EB11003E5CAD /* IMG_3046.PNG */,
 				4909518129A4EB11003E5CAD /* IMG_3047.PNG */,
 				4909517E29A4EB11003E5CAD /* IMG_3048.PNG */,
