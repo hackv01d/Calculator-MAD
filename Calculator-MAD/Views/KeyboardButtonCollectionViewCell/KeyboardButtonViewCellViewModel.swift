@@ -14,11 +14,19 @@ final class KeyboardButtonViewCellViewModel {
     
     private(set) var title: String
     private(set) var style: KeyboardButtonStyle
+    private let isOperation: Bool
     
     // MARK: - Inits
     
     init(title: String, isOperation: Bool, themeStyle: ThemeStyles) {
         self.title = title
+        self.isOperation = isOperation
+        style = isOperation ? .operation(themeStyle) : .command(themeStyle)
+    }
+    
+    // MARK: - Public methods
+    
+    func updateThemeStyle(with themeStyle: ThemeStyles) {
         style = isOperation ? .operation(themeStyle) : .command(themeStyle)
     }
 }

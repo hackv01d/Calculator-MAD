@@ -20,11 +20,7 @@ final class CalculatorViewModel {
     var showCalculateError: ((String, ThemeStyles) -> Void)?
     var didGoToSettingsScreen: ((UINavigationController) -> Void)?
     
-    var cellViewModels: [KeyboardButtonViewCellViewModel] = [] {
-        didSet {
-            updateCollection?()
-        }
-    }
+    var cellViewModels: [KeyboardButtonViewCellViewModel] = []
     
     // MARK: - Private properties
     
@@ -45,7 +41,7 @@ final class CalculatorViewModel {
     private(set) var themeStyle: ThemeStyles {
         didSet {
             UserSettings.shared.themeStyle = themeStyle
-            updateCellViewModels()
+            updateCellsThemeStyle()
             updateThemeStyle?(themeStyle)
         }
     }
@@ -67,7 +63,9 @@ final class CalculatorViewModel {
         self.themeStyle = UserSettings.shared.themeStyle
         isSoundKeyboard = UserSettings.shared.isSoundKeyboard
         isHapticKeyboard = UserSettings.shared.isHapticKeyboard
-        updateCellViewModels()
+        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title,
+                                                                                    isOperation: $0.isOperation,
+                                                                                    themeStyle: themeStyle) }
     }
     
     // MARK: - Public methods
@@ -162,10 +160,9 @@ final class CalculatorViewModel {
         updateExpression?("")
     }
     
-    private func updateCellViewModels() {
-        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title,
-                                                                                    isOperation: $0.isOperation,
-                                                                                    themeStyle: themeStyle) }
+    private func updateCellsThemeStyle() {
+        cellViewModels.forEach { $0.updateThemeStyle(with: themeStyle) }
+        updateCollection?()
     }
 }
 
