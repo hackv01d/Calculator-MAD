@@ -163,6 +163,7 @@ final class CalculatorViewModel {
     
     private func isLargeNumberError() {
         guard model.checkIsNumberLarge() else { return }
+        
         reset()
         showAlertError?("Number too large")
     }

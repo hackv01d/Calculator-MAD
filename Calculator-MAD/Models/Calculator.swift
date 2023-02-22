@@ -18,6 +18,7 @@ final class Calculator {
     private(set) var currentNumber: String
     private(set) var fullExpression: String
     
+    private var isResult = false
     private var isTransition = false
     private var isNumberLarge = false
     
@@ -37,6 +38,7 @@ final class Calculator {
     init() {
         currentNumber = CalculatorData.shared.result
         fullExpression = CalculatorData.shared.expression
+        isResult = true
     }
     
     // MARK: - Public methods
@@ -56,6 +58,9 @@ final class Calculator {
             guard digit != "." else { return nil }
             currentNumber = digit
             isTransition = true
+        } else if isResult {
+            isResult = false
+            currentNumber = digit
         } else {
             currentNumber += digit
         }
@@ -168,7 +173,7 @@ final class Calculator {
         guard let firstNumber = firstNumber else { return nil }
         
         number = firstNumber / 100 * number
-        currentNumber = String(number)
+        currentNumber = String(number.rightType)
         return (number.rightType, "")
     }
     
@@ -201,6 +206,7 @@ final class Calculator {
             return nil
         }
         
+        isResult = true
         currentNumber = result.rightType
         fullExpression = "\(firstNumber.rightType) \(operation) \(secondNumber.rightType)"
         
