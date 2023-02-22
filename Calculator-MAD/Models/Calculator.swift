@@ -19,6 +19,7 @@ final class Calculator {
     private(set) var fullExpression: String
     
     private var isTransition = false
+    private var isNumberLarge = false
     
     private var isFirstNumber: Bool {
         guard firstNumber != nil else { return false }
@@ -99,6 +100,12 @@ final class Calculator {
     func checkDivisionByZero() -> Bool {
         guard isDivisionByZero else { return false }
         currentNumber = ""
+        return true
+    }
+    
+    func checkIsNumberLarge() -> Bool {
+        guard isNumberLarge else { return false }
+        isNumberLarge = false
         return true
     }
     
@@ -189,6 +196,10 @@ final class Calculator {
 
         resetData()
         guard let result = result else { return nil }
+        guard result <= Double(Int.max) else {
+            isNumberLarge = true
+            return nil
+        }
         
         currentNumber = result.rightType
         fullExpression = "\(firstNumber.rightType) \(operation) \(secondNumber.rightType)"

@@ -15,6 +15,7 @@ final class CalculatorViewModel {
     
     var updateCollection: (() -> Void)?
     var updateResult: ((String) -> Void)?
+    var showAlertError: ((String) -> Void)?
     var updateExpression: ((String) -> Void)?
     var updateThemeStyle: ((ThemeStyles) -> Void)?
     var showCalculateError: ((String, ThemeStyles) -> Void)?
@@ -119,6 +120,7 @@ final class CalculatorViewModel {
     
     private func addDigit(_ title: String) {
         guard let value = model.addNewDigit(digit: title) else { return }
+        
         if value.count == 1 { updateThemeStyle?(themeStyle) }
         updateResult?(value.replaceDecimal)
     }
@@ -132,7 +134,10 @@ final class CalculatorViewModel {
     
     private func getResult() {
         guard !isDivisionError() else { return }
-        guard let (value, expression) = model.getResult() else { return }
+        guard let (value, expression) = model.getResult() else {
+            isLargeNumberError()
+            return
+        }
         
         updateResult?(value.replaceDecimal)
         updateExpression?(expression.replaceDecimal)
@@ -140,7 +145,10 @@ final class CalculatorViewModel {
     
     private func updateOperation(_ title: String) {
         guard !isDivisionError() else { return }
-        guard let (value, expression) = model.setOperation(currentOperation: title) else { return }
+        guard let (value, expression) = model.setOperation(currentOperation: title) else {
+            isLargeNumberError()
+            return
+        }
         
         updateResult?(value.replaceDecimal)
         updateExpression?(expression.replaceDecimal)
@@ -153,11 +161,18 @@ final class CalculatorViewModel {
         return true
     }
     
+    private func isLargeNumberError() {
+        guard model.checkIsNumberLarge() else { return }
+        reset()
+        showAlertError?("Number too large")
+    }
+    
     private func reset() {
         model.resetData()
-        updateThemeStyle?(themeStyle)
         updateResult?("0")
         updateExpression?("")
+        updateCellsThemeStyle()
+        updateThemeStyle?(themeStyle)
     }
     
     private func updateCellsThemeStyle() {

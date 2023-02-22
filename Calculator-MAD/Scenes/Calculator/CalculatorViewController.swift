@@ -250,6 +250,13 @@ private extension CalculatorViewController {
             self?.resultCalculatedLabel.textColor = themeStyle.errorTitle
         }
         
+        viewModel.showAlertError = { [weak self] errorDesc in
+            let alert = UIAlertController(title: "Error", message: errorDesc, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            alert.overrideUserInterfaceStyle = .dark
+            self?.present(alert, animated: true)
+        }
+        
         viewModel.didGoToSettingsScreen = { [weak self] navController in
             navController.overrideUserInterfaceStyle = .dark
             navController.modalPresentationStyle = .formSheet
