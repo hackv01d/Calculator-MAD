@@ -112,7 +112,6 @@
 			children = (
 				491D0DED299E245A002F5EB4 /* Calculator.swift */,
 				4962B500299FDEA500562711 /* KeyboardButtons.swift */,
-				493C371A29A2791900D00C97 /* SettingsSection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,6 +177,7 @@
 		493DC2E829A0F5990023AD98 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				493C371A29A2791900D00C97 /* SettingsSection.swift */,
 				493DC2E929A0F5B70023AD98 /* SettingsViewController.swift */,
 				493DC2EB29A0F5E80023AD98 /* SettingsViewModel.swift */,
 			);

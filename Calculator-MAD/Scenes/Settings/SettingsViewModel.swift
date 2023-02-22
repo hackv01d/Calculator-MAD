@@ -81,23 +81,11 @@ final class SettingsViewModel {
     
     func getHeightForRow(at index: Int) -> CGFloat {
         guard let section = SettingsSection(rawValue: index) else { return 60 }
-        
-        switch section {
-        case .keyboard:
-            return 50
-        case .theme:
-            return 60
-        }
+        return section.height
     }
     
     func shouldHighlightRow(at index: Int) -> Bool {
         guard let section = SettingsSection(rawValue: index) else { return false }
-        
-        switch section {
-        case .keyboard:
-            return false
-        case .theme:
-            return true
-        }
+        return section.shouldHighlight
     }
 }

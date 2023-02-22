@@ -112,7 +112,7 @@ class CalculatorViewController: UIViewController {
         
         resultWindowView.backgroundColor = .clear
         resultWindowView.snp.makeConstraints { make in
-            make.top.equalTo(headerLabel.snp.bottom)
+            make.top.equalTo(headerLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(25)
             make.height.equalToSuperview().multipliedBy(0.29)
         }

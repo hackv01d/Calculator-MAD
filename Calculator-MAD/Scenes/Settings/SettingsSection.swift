@@ -27,4 +27,22 @@ enum SettingsSection: Int, CaseIterable {
             return ["Purple", "Green", "Blue", "Orange"]
         }
     }
+    
+    var height: CGFloat {
+        switch self {
+        case .keyboard:
+            return 50
+        case .theme:
+            return 60
+        }
+    }
+    
+    var shouldHighlight: Bool {
+        switch self {
+        case .keyboard:
+            return false
+        case .theme:
+            return true
+        }
+    }
 }
