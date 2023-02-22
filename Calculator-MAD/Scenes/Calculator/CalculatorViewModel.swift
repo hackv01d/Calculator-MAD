@@ -163,6 +163,7 @@ final class CalculatorViewModel {
     private func isDivisionError() -> Bool {
         guard model.checkDivisionByZero() else { return false }
         
+        updateExpression?("")
         showCalculateError?("Error", themeStyle)
         return true
     }
