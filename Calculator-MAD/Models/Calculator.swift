@@ -59,6 +59,7 @@ final class Calculator {
         } else if isResult, operation == nil {
             isResult = false
             currentNumber = digit
+            return (currentNumber, "")
         } else {
             currentNumber += digit
         }
