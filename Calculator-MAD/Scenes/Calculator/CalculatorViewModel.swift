@@ -119,10 +119,16 @@ final class CalculatorViewModel {
     }
     
     private func addDigit(_ title: String) {
-        guard let value = model.addNewDigit(digit: title) else { return }
+        guard let answer = model.addNewDigit(digit: title) else { return }
         
-        if value.count == 1 { updateThemeStyle?(themeStyle) }
-        updateResult?(value.replaceDecimal)
+        if let expression = answer.expression {
+            updateExpression?(expression)
+        }
+        
+        if let result = answer.result {
+            if result.count == 1 { updateThemeStyle?(themeStyle) }
+            updateResult?(result.replaceDecimal)
+        }
     }
     
     private func getPercent() {

@@ -22,11 +22,6 @@ final class Calculator {
     private var isTransition = false
     private var isNumberLarge = false
     
-    private var isFirstNumber: Bool {
-        guard firstNumber != nil else { return false }
-        return true
-    }
-    
     private var isDivisionByZero: Bool {
         guard firstNumber != nil else { return false }
         if (currentNumber == "0" && operation == "÷") { return true }
@@ -43,7 +38,7 @@ final class Calculator {
     
     // MARK: - Public methods
     
-    func addNewDigit(digit: String) -> String? {
+    func addNewDigit(digit: String) -> (result: String?, expression: String?)? {
         if (currentNumber.contains(".") && digit == "." || currentNumber.count >= 15) {
             return nil
         }
@@ -54,18 +49,21 @@ final class Calculator {
         
         if (currentNumber == "-0" && digit != ".") {
             currentNumber = "-" + digit
-        } else if (isFirstNumber && !isTransition) {
+        } else if let firstNumber = firstNumber, !isTransition {
+            guard let operation = operation else { return nil }
             guard digit != "." else { return nil }
+            
             currentNumber = digit
             isTransition = true
-        } else if isResult {
+            return (currentNumber, "\(firstNumber.rightType) \(operation)")
+        } else if isResult, operation == nil {
             isResult = false
             currentNumber = digit
         } else {
             currentNumber += digit
         }
         
-        return currentNumber
+        return (currentNumber, nil)
     }
     
     func setOperation(currentOperation: String) -> (String, String)? {
