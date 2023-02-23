@@ -61,12 +61,18 @@ final class CalculatorViewModel {
 
     init(with model: Calculator) {
         self.model = model
+        
         self.themeStyle = UserSettings.shared.themeStyle
         isSoundKeyboard = UserSettings.shared.isSoundKeyboard
         isHapticKeyboard = UserSettings.shared.isHapticKeyboard
-        cellViewModels = keyboardButtons.map { KeyboardButtonViewCellViewModel.init(title: $0.title,
-                                                                                    isOperation: $0.isOperation,
-                                                                                    themeStyle: themeStyle) }
+        
+        cellViewModels = keyboardButtons.map { button in
+            let cellViewModel = KeyboardButtonViewCellViewModel(title: button.title,
+                                                                isOperation: button.isOperation,
+                                                                themeStyle: themeStyle)
+            cellViewModel.delegate = self
+            return cellViewModel
+        }
     }
     
     // MARK: - Public methods
@@ -207,7 +213,7 @@ extension CalculatorViewModel: SettingsViewModelDelegate {
 
 // MARK: - KeyboardButtonViewCellDelegate
 
-extension CalculatorViewModel: KeyboardButtonViewCellDelegate {
+extension CalculatorViewModel: KeyboardButtonViewCellViewModelDelegate {
     func playSound(_ isHighlighted: Bool) {
         guard isHighlighted, isSoundKeyboard else { return }
         

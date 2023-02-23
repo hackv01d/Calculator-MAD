@@ -138,7 +138,7 @@ class CalculatorViewController: UIViewController {
         resultCalculatedLabel.text = viewModel.getInitialResult()
         resultCalculatedLabel.textColor = viewModel.themeStyle.resultTitle
         resultCalculatedLabel.font = UIFont.systemFont(ofSize: 67, weight: .bold)
-        resultCalculatedLabel.textAlignment = .right
+        resultCalculatedLabel.textAlignment = .left
         resultCalculatedLabel.adjustsFontSizeToFitWidth = true
         resultCalculatedLabel.minimumScaleFactor = 0.2
         resultCalculatedLabel.numberOfLines = 1
@@ -157,7 +157,7 @@ class CalculatorViewController: UIViewController {
         fullExpressionLabel.text = viewModel.getInitialExpression()
         fullExpressionLabel.textColor = viewModel.themeStyle.expressionTitle
         fullExpressionLabel.font = UIFont.systemFont(ofSize: 25)
-        fullExpressionLabel.textAlignment = .right
+        fullExpressionLabel.textAlignment = .left
         fullExpressionLabel.adjustsFontSizeToFitWidth = true
         fullExpressionLabel.minimumScaleFactor = 0.2
         fullExpressionLabel.numberOfLines = 1
@@ -211,7 +211,6 @@ extension CalculatorViewController: UICollectionViewDataSource {
         }
         
         cell.configure(with: viewModel.cellViewModels[indexPath.item])
-        cell.delegate = viewModel
         return cell
     }
 }

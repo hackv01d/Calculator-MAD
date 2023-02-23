@@ -8,7 +8,16 @@
 import Foundation
 import UIKit
 
+protocol KeyboardButtonViewCellViewModelDelegate: AnyObject {
+    func playSound(_ isHighlighted: Bool)
+    func generateHaptic(_ isHighlighted: Bool)
+}
+
 final class KeyboardButtonViewCellViewModel {
+    
+    // MARK: - Public properties
+    
+    weak var delegate: KeyboardButtonViewCellViewModelDelegate?
     
     // MARK: - Private properties
     
@@ -28,5 +37,13 @@ final class KeyboardButtonViewCellViewModel {
     
     func updateThemeStyle(with themeStyle: ThemeStyles) {
         style = isOperation ? .operation(themeStyle) : .command(themeStyle)
+    }
+    
+    func shouldPlaySound(_ isHighlighted: Bool) {
+        delegate?.playSound(isHighlighted)
+    }
+    
+    func shouldGenerateHaptic(_ isHighlighted: Bool) {
+        delegate?.generateHaptic(isHighlighted)
     }
 }
