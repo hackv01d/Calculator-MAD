@@ -15,6 +15,8 @@ protocol KeyboardButtonViewCellViewModelDelegate: AnyObject {
 
 final class KeyboardButtonViewCellViewModel {
     
+    // MARK: - Public properties
+    
     weak var delegate: KeyboardButtonViewCellViewModelDelegate?
     
     // MARK: - Private properties

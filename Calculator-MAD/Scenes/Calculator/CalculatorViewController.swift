@@ -210,10 +210,7 @@ extension CalculatorViewController: UICollectionViewDataSource {
             return KeyboardButtonViewCell()
         }
         
-        let cellViewModel = viewModel.cellViewModels[indexPath.item]
-        cellViewModel.delegate = viewModel
-
-        cell.configure(with: cellViewModel)
+        cell.configure(with: viewModel.cellViewModels[indexPath.item])
         return cell
     }
 }
