@@ -207,7 +207,7 @@ extension CalculatorViewModel: SettingsViewModelDelegate {
 
 // MARK: - KeyboardButtonViewCellDelegate
 
-extension CalculatorViewModel: KeyboardButtonViewCellDelegate {
+extension CalculatorViewModel: KeyboardButtonViewCellViewModelDelegate {
     func playSound(_ isHighlighted: Bool) {
         guard isHighlighted, isSoundKeyboard else { return }
         

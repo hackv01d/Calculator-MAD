@@ -7,26 +7,17 @@
 
 import UIKit
 
-protocol KeyboardButtonViewCellDelegate: AnyObject {
-    func playSound(_ isHighlighted: Bool)
-    func generateHaptic(_ isHighlighted: Bool)
-}
-
 final class KeyboardButtonViewCell: UICollectionViewCell {
     
     static let identifier = "KeyboardButtonViewCell"
-    
-    // MARK: - Public properties
-    
-    weak var delegate: KeyboardButtonViewCellDelegate?
-    
+
     // MARK: - Override properties
     
     override var isHighlighted: Bool {
         didSet {
             updateAppearance()
-            delegate?.playSound(isHighlighted)
-            delegate?.generateHaptic(isHighlighted)
+            viewModel?.shouldPlaySound(isHighlighted)
+            viewModel?.shouldGenerateHaptic(isHighlighted)
         }
     }
     
@@ -39,7 +30,7 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     // MARK: - Private properties
     
     private let keyboardButtonLabel = UILabel()
-    private var style: KeyboardButtonStyle?
+    private var viewModel: KeyboardButtonViewCellViewModel?
     
     // MARK: - Inits
     
@@ -55,10 +46,10 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     // MARK: - Configure
     
     func configure(with viewModel: KeyboardButtonViewCellViewModel) {
+        self.viewModel = viewModel
         backgroundColor = viewModel.style.primaryBackgroundColor
         keyboardButtonLabel.textColor = viewModel.style.titleColor
         keyboardButtonLabel.text = viewModel.title
-        style = viewModel.style
     }
     
     // MARK: - Override methods
@@ -71,12 +62,12 @@ final class KeyboardButtonViewCell: UICollectionViewCell {
     // MARK: - Private methods
     
     private func updateAppearance() {
-        backgroundColor = isHighlighted ? style?.secondaryBackgroundColor : style?.primaryBackgroundColor
+        backgroundColor = isHighlighted ? viewModel?.style.secondaryBackgroundColor : viewModel?.style.primaryBackgroundColor
     }
     
     private func buttonIsSelected() {
-        backgroundColor = isSelected ? style?.selectedBackgroundColor : style?.primaryBackgroundColor
-        keyboardButtonLabel.textColor = isSelected ? style?.selectedTitleColor : style?.titleColor
+        backgroundColor = isSelected ? viewModel?.style.selectedBackgroundColor : viewModel?.style.primaryBackgroundColor
+        keyboardButtonLabel.textColor = isSelected ? viewModel?.style.selectedTitleColor : viewModel?.style.titleColor
     }
     
     // MARK: - Setup
