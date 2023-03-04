@@ -11,6 +11,7 @@ import UIKit
 extension UIColor {
     static let appGray = UIColor(named: "Gray")
     static let appBackground = UIColor(named: "appBackground")
+    static let headerTitle = UIColor(named: "headerTitle")
     static let settingsViewCell = UIColor(named: "settingsViewCell")
     
     // MARK: - Purple Theme

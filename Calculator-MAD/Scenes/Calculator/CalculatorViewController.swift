@@ -84,8 +84,8 @@ class CalculatorViewController: UIViewController {
         view.addSubview(headerLabel)
         
         headerLabel.text = viewModel.header
-        headerLabel.textColor = .white
-        headerLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        headerLabel.textColor = .headerTitle
+        headerLabel.font = UIFont.systemFont(ofSize: 27, weight: .medium)
         headerLabel.textAlignment = .left
         
         headerLabel.snp.makeConstraints { make in
@@ -138,7 +138,7 @@ class CalculatorViewController: UIViewController {
         resultCalculatedLabel.text = viewModel.getInitialResult()
         resultCalculatedLabel.textColor = viewModel.themeStyle.resultTitle
         resultCalculatedLabel.font = UIFont.systemFont(ofSize: 67, weight: .bold)
-        resultCalculatedLabel.textAlignment = .left
+        resultCalculatedLabel.textAlignment = .right
         resultCalculatedLabel.adjustsFontSizeToFitWidth = true
         resultCalculatedLabel.minimumScaleFactor = 0.2
         resultCalculatedLabel.numberOfLines = 1
@@ -157,7 +157,7 @@ class CalculatorViewController: UIViewController {
         fullExpressionLabel.text = viewModel.getInitialExpression()
         fullExpressionLabel.textColor = viewModel.themeStyle.expressionTitle
         fullExpressionLabel.font = UIFont.systemFont(ofSize: 25)
-        fullExpressionLabel.textAlignment = .left
+        fullExpressionLabel.textAlignment = .right
         fullExpressionLabel.adjustsFontSizeToFitWidth = true
         fullExpressionLabel.minimumScaleFactor = 0.2
         fullExpressionLabel.numberOfLines = 1

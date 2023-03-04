@@ -59,10 +59,10 @@ final class CalculatorViewModel {
     
     // MARK: - Inits
 
-    init(with model: Calculator) {
-        self.model = model
+    init() {
+        model = Calculator()
         
-        self.themeStyle = UserSettings.shared.themeStyle
+        themeStyle = UserSettings.shared.themeStyle
         isSoundKeyboard = UserSettings.shared.isSoundKeyboard
         isHapticKeyboard = UserSettings.shared.isHapticKeyboard
         

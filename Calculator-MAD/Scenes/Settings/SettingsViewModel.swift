@@ -19,6 +19,7 @@ final class SettingsViewModel {
     
     var keyboardSettingsViewModels = [KeyboardSettingsViewCellViewModel]()
     var themeStyleSettingsViewModels = [ThemeStyleSettingsViewCellViewModel]()
+    
     weak var delegate: SettingsViewModelDelegate?
     
     // MARK: - Private properties
