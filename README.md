@@ -5,6 +5,7 @@
 * Swift
 * UIKit
 * SnapKit
+* UserDefaults
 * MVVM
 
 ## Screenshots
